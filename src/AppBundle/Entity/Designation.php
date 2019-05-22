@@ -40,4 +40,86 @@ class Designation {
   private $department_id;
   
   
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Designation
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Designation
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set departmentId
+     *
+     * @param \AppBundle\Entity\department $departmentId
+     *
+     * @return Designation
+     */
+    public function setDepartmentId(\AppBundle\Entity\department $departmentId = null)
+    {
+        $this->department_id = $departmentId;
+
+        return $this;
+    }
+
+    /**
+     * Get departmentId
+     *
+     * @return \AppBundle\Entity\department
+     */
+    public function getDepartmentId()
+    {
+        return $this->department_id;
+    }
 }
