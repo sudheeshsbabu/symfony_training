@@ -71,7 +71,7 @@ class Employee {
      * @var designation
      *
      * @ORM\ManyToOne(targetEntity="designation")
-     * @ORM\JoinColumn(name="desgination", referencedColumnName="id")
+     * @ORM\JoinColumn(name="designation", referencedColumnName="id")
      */
     private $designation_id;
 }
