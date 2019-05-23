@@ -9,3 +9,7 @@ employee_addemployee:
 employee_employeeslist:
     path:     /employees/list
     defaults: { _controller: EmployeeBundle:Default:getEmployees }
+    
+employee_employee_detail:
+    path:       /show/empolyee/{id}
+    controller: App\Controller\BlogController::index

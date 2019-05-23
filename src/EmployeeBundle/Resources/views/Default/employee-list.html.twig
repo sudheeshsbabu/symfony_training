@@ -17,7 +17,8 @@
                 {% for employee in employees %}
                     <tr>
                         <td>{{ employee.id }}</td>
-                        <td>{{ employee.name }}</td>
+                        {% set emp_id = employee.id %}
+                        <td><a href="{{ path('employee_employee_detail', {'id': emp_id}) }}">{{ employee.name }}</a></td>
                         <td>{{ employee.village }}</td>
                         <td>{{ employee.district }}</td>
                         <td>{{ employee.salary }}</td>
