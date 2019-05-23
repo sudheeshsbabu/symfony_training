@@ -1,3 +1,3 @@
 employee_homepage:
-    path:     /
+    path:     /employeedetails
     defaults: { _controller: EmployeeBundle:Default:index }
