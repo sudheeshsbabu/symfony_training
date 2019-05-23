@@ -12,4 +12,4 @@ employee_employeeslist:
     
 employee_employee_detail:
     path:       /show/empolyee/{id}
-    controller: App\Controller\BlogController::index
+    defaults: { _controller: EmployeeBundle:Default:getEmployeeDetail }

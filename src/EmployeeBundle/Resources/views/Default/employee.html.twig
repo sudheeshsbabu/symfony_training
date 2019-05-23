@@ -1,8 +1,8 @@
 {# empty Twig template #}
 <main>
-    <div class="employees-list-wrap">
-        <h1>{{ 'Employees List' }}</h1>
-        <div class="employees-list-data">
+    <div class="employee-wrap">
+        <h1>{{ 'Employee Details' }}</h1>
+        <div class="employee-details">
             <table>
                 <thead>
                 <tr>
@@ -14,16 +14,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for employee in employees %}
                     <tr>
                         <td>{{ employee.id }}</td>
-                        {% set emp_id = employee.id %}
-                        <td><a href="{{ path('employee_employee_detail', {'id': emp_id}) }}">{{ employee.name }}</a></td>
+                        <td>{{ employee.name }}</td>
                         <td>{{ employee.village }}</td>
                         <td>{{ employee.district }}</td>
                         <td>{{ employee.salary }}</td>
                     </tr>
-                {% endfor %}
                 </tbody>
             </table>
             {#{ employees }#}

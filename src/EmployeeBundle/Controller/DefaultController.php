@@ -49,10 +49,20 @@ class DefaultController extends Controller
     public function getEmployeesAction() {
         $entityManager = $this->getDoctrine()->getManager();
         $employees = $entityManager->getRepository('EmployeeBundle:Employee')->findAll();
-        //return new Response($employees);
+
         return $this->render(
                 'EmployeeBundle:Default:employee-list.html.twig', 
                 ['employees' => $employees]
         );
+    }
+    public function getEmployeeDetailAction($id) {
+        if ($id > 0) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $employee = $entityManager->getRepository('EmployeeBundle:Employee')->find($id);
+            return $this->render(
+                'EmployeeBundle:Default:employee.html.twig', 
+                ['employee' => $employee]
+            );
+        }
     }
 }
