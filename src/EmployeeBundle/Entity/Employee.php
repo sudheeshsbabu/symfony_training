@@ -55,7 +55,7 @@ class Employee {
     /**
      * @var company
      *
-     * @ORM\ManyToOne(targetEntity="company")
+     * @ORM\ManyToOne(targetEntity="Company")
      * @ORM\JoinColumn(name="company", referencedColumnName="id", nullable=true)
      */
     private $company_id;
@@ -63,7 +63,7 @@ class Employee {
     /**
      * @var designation
      *
-     * @ORM\ManyToOne(targetEntity="designation")
+     * @ORM\ManyToOne(targetEntity="Designation")
      * @ORM\JoinColumn(name="designation", referencedColumnName="id", nullable=true)
      */
     private $designation_id;

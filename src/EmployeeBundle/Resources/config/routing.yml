@@ -5,3 +5,7 @@ employee_homepage:
 employee_addemployee:
     path:     /addemployee
     defaults: { _controller: EmployeeBundle:Default:create }
+    
+employee_employeeslist:
+    path:     /employees/list
+    defaults: { _controller: EmployeeBundle:Default:getEmployees }

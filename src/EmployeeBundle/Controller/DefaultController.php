@@ -25,8 +25,8 @@ class DefaultController extends Controller
                     );
 
         $designation = $entityManager->getRepository('EmployeeBundle:Designation')->findOneBy(
-                    array('name' => 'Software Developer')
-                );
+                        array('name' => 'Software Developer')
+                    );
 
         $employee = new Employee();
         $employee->setSerialNo(5002);
@@ -44,5 +44,15 @@ class DefaultController extends Controller
         $entityManager->flush();
 
         return new Response('Saved new product with id '.$employee->getId());
+    }
+    
+    public function getEmployeesAction() {
+        $entityManager = $this->getDoctrine()->getManager();
+        $employees = $entityManager->getRepository('EmployeeBundle:Employee')->findAll();
+        //return new Response($employees);
+        return $this->render(
+                'EmployeeBundle:Default:employee-list.html.twig', 
+                ['employees' => $employees]
+        );
     }
 }

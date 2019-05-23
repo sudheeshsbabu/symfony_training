@@ -1,0 +1,31 @@
+{# empty Twig template #}
+<main>
+    <div class="employee-list-wrap">
+        <h1>{{ 'Employee Details' }}</h1>
+        <div class="employee-data">
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Village</th>
+                    <th>District</th>
+                    <th>Salary</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for employee in employees %}
+                    <tr>
+                        <td>{{ employee.id }}</td>
+                        <td>{{ employee.name }}</td>
+                        <td>{{ employee.village }}</td>
+                        <td>{{ employee.district }}</td>
+                        <td>{{ employee.salary }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {#{ employees }#}
+        </div>
+    </div>
+</main>
