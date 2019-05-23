@@ -14,6 +14,7 @@ class DefaultController extends Controller
     {
         return $this->render('EmployeeBundle:Default:index.html.twig');
     }
+    
     /**
      * A simple function to perform database transactions.
      */
@@ -48,6 +49,7 @@ class DefaultController extends Controller
 
         return new Response('Saved new product with id '.$employee->getId());
     }
+    
     /**
      * Function to list all employees.
      */
@@ -60,11 +62,13 @@ class DefaultController extends Controller
                 ['employees' => $employees]
         );
     }    
+    
     /**
      * Function to show detail of employee.
      * Arguments: $id
      */
     public function getEmployeeDetailAction($id) {
+        
         // Validate the $id argument.
         if ($id > 0) {
             $entityManager = $this->getDoctrine()->getManager();
