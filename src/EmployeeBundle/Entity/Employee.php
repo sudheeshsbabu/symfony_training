@@ -58,7 +58,7 @@ class Employee {
      * @ORM\ManyToOne(targetEntity="Company")
      * @ORM\JoinColumn(name="company", referencedColumnName="id", nullable=true)
      */
-    private $company_id;
+    private $companyId;
 
     /**
      * @var designation
@@ -66,7 +66,7 @@ class Employee {
      * @ORM\ManyToOne(targetEntity="Designation")
      * @ORM\JoinColumn(name="designation", referencedColumnName="id", nullable=true)
      */
-    private $designation_id;
+    private $designationId;
 
     /**
      * Get id
@@ -207,7 +207,7 @@ class Employee {
      */
     public function setCompanyId(\EmployeeBundle\Entity\company $companyId = null)
     {
-        $this->company_id = $companyId;
+        $this->companyId = $companyId;
 
         return $this;
     }
@@ -219,7 +219,7 @@ class Employee {
      */
     public function getCompanyId()
     {
-        return $this->company_id;
+        return $this->companyId;
     }
 
     /**
@@ -231,7 +231,7 @@ class Employee {
      */
     public function setDesignationId(\EmployeeBundle\Entity\designation $designationId = null)
     {
-        $this->designation_id = $designationId;
+        $this->designationId = $designationId;
 
         return $this;
     }
@@ -243,6 +243,6 @@ class Employee {
      */
     public function getDesignationId()
     {
-        return $this->designation_id;
+        return $this->designationId;
     }
 }

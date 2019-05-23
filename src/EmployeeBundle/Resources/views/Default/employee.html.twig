@@ -11,6 +11,8 @@
                     <th>Village</th>
                     <th>District</th>
                     <th>Salary</th>
+                    <th>Company</th>
+                    <th>Designation</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -20,6 +22,9 @@
                         <td>{{ employee.village }}</td>
                         <td>{{ employee.district }}</td>
                         <td>{{ employee.salary }}</td>
+                        <td>{{ employee.companyId.name }}</td>
+                        <td>{{ employee.designationId.name }}</td>
+                        
                     </tr>
                 </tbody>
             </table>
