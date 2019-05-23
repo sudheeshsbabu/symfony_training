@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use EmployeeBundle\Entity\Department;
 use EmployeeBundle\Entity\Designation;
-use EmployeeBundle\Entity\Employee;
+use EmployeeBundle\Entity\Employee;use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends Controller
 {
@@ -69,9 +69,15 @@ class DefaultController extends Controller
         if ($id > 0) {
             $entityManager = $this->getDoctrine()->getManager();
             $employee = $entityManager->getRepository('EmployeeBundle:Employee')->find($id);
+
+            // Invoke session object
+            $session = new Session();
+
+            $session->set('employee_company_name', $employee->getCompanyId()->getName());
+
             return $this->render(
                 'EmployeeBundle:Default:employee.html.twig', 
-                ['employee' => $employee]
+                ['employee' => $employee, 'company' => $session->get('employee_company_name')]
             );
         }
     }
