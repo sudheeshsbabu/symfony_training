@@ -1,53 +1,51 @@
 <?php
+
 namespace EmployeeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* @ORM\Table(name="designation")
-* @ORM\Entity
-*/
+ * @ORM\Table(name="designation")
+ * @ORM\Entity/**
+ */
 class Designation {
 
-	/**
-	* @var integer $id
-	* @ORM\Column(type="integer")
-	* @ORM\Id
-	* @ORM\GeneratedValue(strategy="IDENTITY")
-	*/
-	private $id;
+    /**
+     * @var integer $id
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-	/**
-	* @var string $name
-	*
-	* @ORM\Column(type="string", length=100, nullable=false)
-	*/
-	private $name;
+    /**
+     * @var string $name
+     *
+     * @ORM\Column(type="string", length=100, nullable=false)
+     */
+    private $name;
 
-	/**
-	* @var text $description
-	*
-	* @ORM\Column(type="text", nullable=false)
-	*/
-	private $description;
+    /**
+     * @var text $description
+     *
+     * @ORM\Column(type="text", nullable=false)
+     */
+    private $description;
 
-  /**
-  * @var department
-  *
-  * @ORM\ManyToOne(targetEntity="department")
-  * @ORM\JoinColumn(name="department", referencedColumnName="id")
-  */
-  private $department_id;
-  
-  
+    /**
+     * @var department
+     *
+     * @ORM\ManyToOne(targetEntity="Department")
+     * @ORM\JoinColumn(name="department", referencedColumnName="id", nullable=true)
+     */
+    private $department;
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -58,8 +56,7 @@ class Designation {
      *
      * @return Designation
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -70,8 +67,7 @@ class Designation {
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -82,8 +78,7 @@ class Designation {
      *
      * @return Designation
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
 
         return $this;
@@ -94,32 +89,30 @@ class Designation {
      *
      * @return string
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
     /**
-     * Set departmentId
+     * Set department
      *
-     * @param \EmployeeBundle\Entity\department $departmentId
+     * @param \EmployeeBundle\Entity\department $department
      *
      * @return Designation
      */
-    public function setDepartmentId(\EmployeeBundle\Entity\department $departmentId = null)
-    {
-        $this->department_id = $departmentId;
+    public function setDepartment(\EmployeeBundle\Entity\department $department = null) {
+        $this->department = $department;
 
         return $this;
     }
 
     /**
-     * Get departmentId
+     * Get department
      *
      * @return \EmployeeBundle\Entity\department
      */
-    public function getDepartmentId()
-    {
-        return $this->department_id;
+    public function getDepartment() {
+        return $this->department;
     }
+
 }

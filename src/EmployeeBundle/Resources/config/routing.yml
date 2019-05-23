@@ -1,3 +1,7 @@
 employee_homepage:
     path:     /employeedetails
     defaults: { _controller: EmployeeBundle:Default:index }
+    
+employee_addemployee:
+    path:     /addemployee
+    defaults: { _controller: EmployeeBundle:Default:create }

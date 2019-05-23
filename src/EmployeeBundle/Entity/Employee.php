@@ -52,18 +52,11 @@ class Employee {
      */
     private $salary;
 
-	/**
-	 * @var text $description
-	 *
-	 * @ORM\Column(type="text", nullable=false)
-	 */
-	private $description;
-
     /**
      * @var company
      *
      * @ORM\ManyToOne(targetEntity="company")
-     * @ORM\JoinColumn(name="company", referencedColumnName="id")
+     * @ORM\JoinColumn(name="company", referencedColumnName="id", nullable=true)
      */
     private $company_id;
 
@@ -71,7 +64,7 @@ class Employee {
      * @var designation
      *
      * @ORM\ManyToOne(targetEntity="designation")
-     * @ORM\JoinColumn(name="designation", referencedColumnName="id")
+     * @ORM\JoinColumn(name="designation", referencedColumnName="id", nullable=true)
      */
     private $designation_id;
 
@@ -203,30 +196,6 @@ class Employee {
     public function getSalary()
     {
         return $this->salary;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Employee
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**
