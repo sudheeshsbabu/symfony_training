@@ -13,3 +13,7 @@ employee_employeeslist:
 employee_employee_detail:
     path:       /show/empolyee/{id}
     defaults: { _controller: EmployeeBundle:Default:getEmployeeDetail }
+    
+employee_max_salary:
+    path:       /second_max_salary
+    defaults: { _controller: EmployeeBundle:Default:getSecondMaxSalary }

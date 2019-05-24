@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use EmployeeBundle\Entity\Department;
 use EmployeeBundle\Entity\Designation;
-use EmployeeBundle\Entity\Employee;use Symfony\Component\HttpFoundation\Session\Session;
+use EmployeeBundle\Entity\Employee;
+use Symfony\Component\HttpFoundation\Session\Session;
+use EmployeeBundle\Repository\EmployeeRepository;
 
 class DefaultController extends Controller
 {
@@ -84,5 +86,15 @@ class DefaultController extends Controller
                 ['employee' => $employee, 'company' => $session->get('employee_company_name')]
             );
         }
+    }
+
+    /**
+     * Displays second largest salary form employee table.
+     */
+    public function getSecondMaxSalaryAction() {
+        $entityManager = $this->getDoctrine()->getManager();
+        $employee = $entityManager->getRepository('EmployeeBundle:Employee')->getSecondMaxEmployeeSalary();
+        dump($employee);
+        die;
     }
 }
