@@ -1,7 +1,9 @@
 {# empty Twig template #}
+{% extends "EmployeeBundle:Default:company.html.twig" %}
+{% block emp_list %}
 <main>
     <div class="employees-list-wrap">
-        <h1>{{ 'Employees List' }}</h1>
+        <h2>{{ 'Employees List' }}</h2>
         <div class="employees-list-data">
             <table>
                 <thead>
@@ -34,3 +36,4 @@
         </div>
     </div>
 </main>
+{% endblock emp_list %}
