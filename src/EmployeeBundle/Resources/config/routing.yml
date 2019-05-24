@@ -3,7 +3,7 @@ employee_homepage:
     defaults: { _controller: EmployeeBundle:Default:index }
     
 employee_addemployee:
-    path:     /addemployee
+    path:     /add_employee
     defaults: { _controller: EmployeeBundle:Default:create }
     
 employee_employeeslist:
@@ -17,3 +17,7 @@ employee_employee_detail:
 employee_max_salary:
     path:       /second_max_salary
     defaults: { _controller: EmployeeBundle:Default:getSecondMaxSalary }
+    
+employee_add_company:
+    path:       /add_company
+    defaults: { _controller: EmployeeBundle:Default:addCompany }

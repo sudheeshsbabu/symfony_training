@@ -3,12 +3,15 @@
 namespace EmployeeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use EmployeeBundle\Entity\Department;
 use EmployeeBundle\Entity\Designation;
 use EmployeeBundle\Entity\Employee;
+use EmployeeBundle\Entity\Company;
 use Symfony\Component\HttpFoundation\Session\Session;
 use EmployeeBundle\Repository\EmployeeRepository;
+use EmployeeBundle\Form\CompanyType;
 
 class DefaultController extends Controller
 {
@@ -107,5 +110,34 @@ class DefaultController extends Controller
                 ['employees' => $records]
         );
         }
+    }
+    
+    public function addCompanyAction(Request $request)
+    {     
+        $company = new Company();
+
+        $form = $this->createForm(CompanyType::class, $company);
+
+
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $company = $form->getData();
+
+            // ... perform some action, such as saving the task to the database
+            // for example, if Task is a Doctrine entity, save it!
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($task);
+            // $entityManager->flush();
+
+            return $this->redirectToRoute('task_success');
+        }
+
+        return $this->render('EmployeeBundle:Default:company_form.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
