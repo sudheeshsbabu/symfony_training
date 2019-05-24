@@ -126,6 +126,8 @@ class DefaultController extends Controller
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
             $company = $form->getData();
+            dump($company);
+            die;
 
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
@@ -133,7 +135,7 @@ class DefaultController extends Controller
             // $entityManager->persist($task);
             // $entityManager->flush();
 
-            return $this->redirectToRoute('task_success');
+            //return $this->redirectToRoute('task_success');
         }
 
         return $this->render('EmployeeBundle:Default:company_form.html.twig', [

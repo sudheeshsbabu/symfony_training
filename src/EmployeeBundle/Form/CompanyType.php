@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class CompanyType extends AbstractType
 {
@@ -23,7 +24,8 @@ class CompanyType extends AbstractType
                 ->add('serial_no', null, array(
                 'attr' => array(
                 'placeholder' => 'Serial No.' ),
-                'constraints' => array(new NotBlank()) ));
+                'constraints' => array(new NotBlank()) ))
+                ->add('save', SubmitType::class);
     }/**
      * {@inheritdoc}
      */
