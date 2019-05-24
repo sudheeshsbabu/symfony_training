@@ -1,0 +1,37 @@
+{# empty Twig template #}
+<main>
+    <div class="employees-list-wrap">
+        <h1>{{ 'Employees With Second Largest Salary' }}</h1>
+        <div class="employees-list-data">
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Village</th>
+                    <th>District</th>
+                    <th>Salary</th>
+                    <th>Company</th>
+                    <th>Designation</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for employee in employees %}
+                    <tr>
+                        <td>{{ employee.id }}</td>
+                        {% set emp_id = employee.id %}
+                        <td><a href="{{ path('employee_employee_detail', {'id': emp_id}) }}">{{ employee.name }}</a></td>
+                        <td>{{ employee.village }}</td>
+                        <td>{{ employee.district }}</td>
+                        <td>{{ employee.salary }}</td>
+                        <td>{{ employee.companyId.name }}</td>
+                        <td>{{ employee.designationId.name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {#{ employees }#}
+        </div>
+    </div>
+</main>
+{# empty Twig template #}

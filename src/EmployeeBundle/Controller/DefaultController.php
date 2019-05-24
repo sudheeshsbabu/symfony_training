@@ -93,8 +93,19 @@ class DefaultController extends Controller
      */
     public function getSecondMaxSalaryAction() {
         $entityManager = $this->getDoctrine()->getManager();
-        $employee = $entityManager->getRepository('EmployeeBundle:Employee')->getSecondMaxEmployeeSalary();
-        dump($employee);
-        die;
+
+        // Fetch second largest salary.
+        $secondLargestSalary = $entityManager->getRepository('EmployeeBundle:Employee')->getSecondMaxEmployeeSalary();
+
+        // Fetch all records with the salary value = $secondLargestSalary
+        if (!empty($secondLargestSalary)) {
+            $records = $entityManager->getRepository('EmployeeBundle:Employee')->findBy(
+                        array('salary' => $secondLargestSalary[0][1])
+                    );
+        return $this->render(
+                'EmployeeBundle:Default:second_largest_salary.html.twig',
+                ['employees' => $records]
+        );
+        }
     }
 }
