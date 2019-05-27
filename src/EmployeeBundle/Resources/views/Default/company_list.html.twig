@@ -27,8 +27,8 @@
                     <td>{{ company.address }}</td>
                     <td>{{ company.serialNo }}</td>
                     <td><a href="{{ path('company_edit', {'id': company.id}) }}">{{ 'Edit' }}</a></td>
-                    <td>
-                        <a href="{{ path('company_delete', {'id': company.id}) }}" style="color:#f00;" class="company-delete">
+                    <td class="company-delete">
+                        <a href="{{ path('company_delete', {'id': company.id}) }}" style="color:#f00;">
                             {{ 'Delete' }}
                         </a>
                     </td>
@@ -51,7 +51,7 @@
     });
     jQuery('.company-delete').on("click", function(e){
 	e.preventDefault();
-	var delete_url = jQuery(this).attr("href");
+	var delete_url = jQuery(this).children().attr("href");
 	console.log(delete_url);
 	jQuery.ajax({
             url: delete_url,
