@@ -1,0 +1,28 @@
+{# empty Twig template #}
+<main>
+    <div class="employee-wrap">
+        <h1>{{ 'Employee Details' }}</h1>
+        <div class="employee-details">
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Serial No.</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for company in companies %}
+                    <tr>
+                        <td>{{ company.id }}</td>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.address }}</td>
+                        <td>{{ company.serialNo }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

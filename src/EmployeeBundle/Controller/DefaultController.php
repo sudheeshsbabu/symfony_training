@@ -111,35 +111,41 @@ class DefaultController extends Controller
         );
         }
     }
-    
+    /**
+     * Insert a new Company.
+     * @param Request $request
+     * @return type Request
+     */
     public function addCompanyAction(Request $request)
     {     
         $company = new Company();
 
         $form = $this->createForm(CompanyType::class, $company);
 
-
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
             $company = $form->getData();
-            dump($company);
-            die;
+//            dump($company);
+//            die;
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($company);
+            $entityManager->flush();
 
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($task);
-            // $entityManager->flush();
-
-            //return $this->redirectToRoute('task_success');
+            return $this->redirectToRoute('employe_list_companies');
         }
 
         return $this->render('EmployeeBundle:Default:company_form.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+    
+    public function listCompaniesAction() {
+        $entityManager = $this->getDoctrine()->getManager();
+        $companies = $entityManager->getRepository('EmployeeBundle:Company')->findAll();
+//        dump($companies);
+//        die;
+        return $this->render('EmployeeBundle:Default:company_list.html.twig',
+                ['companies' => $companies]);
     }
 }
