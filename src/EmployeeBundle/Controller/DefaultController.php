@@ -148,6 +148,10 @@ class DefaultController extends Controller
         ]);
     }
     
+    /**
+     * List all companies.
+     * @return type
+     */
     public function listCompaniesAction() {
         $entityManager = $this->getDoctrine()->getManager();
         $companies = $entityManager->getRepository('EmployeeBundle:Company')->findAll();
