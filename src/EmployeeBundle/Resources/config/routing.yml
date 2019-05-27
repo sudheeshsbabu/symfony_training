@@ -29,3 +29,7 @@ employe_list_companies:
 company_delete:
     path: /company/delete/{id}
     defaults: {_controller: EmployeeBundle:Default:deleteCompany }
+    
+company_edit:
+    path: /company/edit/{id}
+    defaults: {_controller: EmployeeBundle:Default:editCompany }

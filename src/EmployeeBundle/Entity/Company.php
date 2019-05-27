@@ -5,9 +5,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
-* @ORM\Table(name="company")
-* @ORM\Entity
-*/
+ * @ORM\Table(name="company")
+ * @ORM\Entity
+ * @ORM\Entity(repositoryClass="EmployeeBundle\Repository\CompanyRepository")
+ */
 class Company {
 
 	/**

@@ -173,4 +173,32 @@ class DefaultController extends Controller
         
         return $this->redirectToRoute('employe_list_companies');
     }
+    
+    public function editCompanyAction(Request $request, $id) {
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $company = $entityManager->getRepository('EmployeeBundle:Company')->find($id);
+        
+        // Set the comapany record to the form
+        $form = $this->createForm(CompanyType::class, $company);
+        $form->handleRequest($request);
+        
+        // Validate Serial number & set error message if necessary.
+        $serialNo = $form['serialNo']->getData();
+        if ($form->isSubmitted() && !is_numeric($serialNo)) {
+            $error = new FormError('Serial no should be numeric');
+            $form['serialNo']->addError($error);
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $company = $form->getData();
+            
+            $status = $entityManager->getRepository('EmployeeBundle:Company')->updateCompany($company);
+            return $this->redirectToRoute('employe_list_companies');
+        }
+
+        return $this->render('EmployeeBundle:Default:company_form.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }
