@@ -2,6 +2,7 @@
 namespace EmployeeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
 * @ORM\Table(name="company")
@@ -32,11 +33,15 @@ class Company {
 	private $address;
 
 	/**
-	* @var integer serial_no
-	*
-	* @ORM\Column(type="integer")
-	*/
-	private $serial_no;
+	 * @var integer serial_no
+	 * @Assert\NotBlank(message="Please insert serial number")
+     * @Assert\Type(
+     * type="numeric",
+     * message="The value {{ value }} is not a valid {{ type }}."
+     * )
+	 * @ORM\Column(type="integer")
+     */
+	private $serialNo;
 
     /**
      * Get id
@@ -105,7 +110,7 @@ class Company {
      */
     public function setSerialNo($serialNo)
     {
-        $this->serial_no = $serialNo;
+        $this->serialNo = $serialNo;
 
         return $this;
     }
@@ -117,6 +122,6 @@ class Company {
      */
     public function getSerialNo()
     {
-        return $this->serial_no;
+        return $this->serialNo;
     }
 }

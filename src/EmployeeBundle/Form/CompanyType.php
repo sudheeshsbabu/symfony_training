@@ -21,7 +21,7 @@ class CompanyType extends AbstractType
                 'placeholder' => 'Name' ),
                 'constraints' => array(new NotBlank()) ))
                 ->add('address')
-                ->add('serial_no', null, array(
+                ->add('serialNo', null, array(
                 'attr' => array(
                 'placeholder' => 'Serial No.' ),
                 'constraints' => array(new NotBlank()) ))

@@ -12,6 +12,7 @@ use EmployeeBundle\Entity\Company;
 use Symfony\Component\HttpFoundation\Session\Session;
 use EmployeeBundle\Repository\EmployeeRepository;
 use EmployeeBundle\Form\CompanyType;
+use Symfony\Component\Form\FormError;
 
 class DefaultController extends Controller
 {
@@ -123,6 +124,13 @@ class DefaultController extends Controller
         $form = $this->createForm(CompanyType::class, $company);
 
         $form->handleRequest($request);
+        
+        // Validate Serial number & set error message if necessary.
+        $serialNo = $form['serialNo']->getData();
+        if ($form->isSubmitted() && !is_numeric($serialNo)) {
+            $error = new FormError('Serial no should be numeric');
+            $form['serialNo']->addError($error);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $company = $form->getData();
