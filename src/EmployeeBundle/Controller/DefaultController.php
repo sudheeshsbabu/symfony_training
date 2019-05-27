@@ -150,14 +150,27 @@ class DefaultController extends Controller
     
     /**
      * List all companies.
-     * @return type
+     * @return type Response
      */
     public function listCompaniesAction() {
         $entityManager = $this->getDoctrine()->getManager();
         $companies = $entityManager->getRepository('EmployeeBundle:Company')->findAll();
-//        dump($companies);
-//        die;
+
         return $this->render('EmployeeBundle:Default:company_list.html.twig',
                 ['companies' => $companies]);
+    }
+    
+    /**
+     * Delete a company.
+     * @param type integer
+     * @return type Response
+     */
+    public function deleteCompanyAction($id) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $company = $entityManager->getRepository('EmployeeBundle:Company')->find($id);
+        $entityManager->remove($company);
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('employe_list_companies');
     }
 }

@@ -10,6 +10,8 @@
                 <th>Name</th>
                 <th>Address</th>
                 <th>Serial No.</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -19,6 +21,8 @@
                     <td>{{ company.name }}</td>
                     <td>{{ company.address }}</td>
                     <td>{{ company.serialNo }}</td>
+                    <td><a href="{{ path('company_delete', {'id': company.id}) }}">{{ 'Edit' }}</a></td>
+                    <td><a href="{{ path('company_delete', {'id': company.id}) }}" style="color:#f00;">{{ 'Delete' }}</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
