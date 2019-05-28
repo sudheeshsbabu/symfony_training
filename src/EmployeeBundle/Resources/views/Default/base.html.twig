@@ -14,61 +14,76 @@
 
 <script src="{{ asset('/bundles/employee/js/jquery-3.4.1.min.js') }}"></script>
 <script>
-    jQuery('#add-company').on("click",function(e){
-        var add_url = '{{path('employee_add_company')}}'; 
-	jQuery.ajax({
-            url: add_url,
-            success: function(response) {
-                jQuery("#company-details-wrap").html(response);
-            }
-	});
-    });
-    jQuery('.company-delete').click(function(e){
-	e.preventDefault();
-	var delete_url = jQuery(this).attr("href");
-	console.log(delete_url);
-	jQuery.ajax({
-            url: delete_url,
-            success: function(response) {
-                    var content = jQuery(response).find('.company-details-wrap').html(); 
-                    jQuery(".company-details-wrap").html(content);
-            },
-            error : function(xhr, textStatus, errorThrown) {
-                alert('Ajax request failed due to :' + errorThrown);
-            }
-	});
-    });
-    jQuery('.company-edit').click(function(e){
-	e.preventDefault();
-	var edit_url = jQuery(this).attr("href");
-	console.log(edit_url);
-	jQuery.ajax({
-            url: edit_url,
-            success: function(response) {
-                var content = jQuery(response).find('.company-form-wrap').html(); 
-                jQuery(".companies-wrap").html(content);
-            },
-            error : function(xhr, textStatus, errorThrown) {
-                alert('Ajax request failed due to :' + errorThrown);
-            }
-	});
-    });
-    jQuery("#employeebundle_company_save").on("click", function(e){
-        e.preventDefault();
-        console.log('submitting!');
-        var $form = jQuery('#employeebundle_company').parent();
-        jQuery.ajax({
-            url: $form.attr('action'),
-            method: 'POST',
-            data: $form.serialize(),
-            success: function(response) {
-                var content = jQuery(response).find('.companies-wrap').html(); 
-                jQuery(".companies-wrap").html(content);
-                jQuery(".company-form-wrap").remove();
-            },
-            error : function(xhr, textStatus, errorThrown) {
-                alert('Ajax request failed due to :' + errorThrown);
-            }
+    jQuery(document).ready(function() {
+        // Add company action for company list page.
+        jQuery(document).on("click", '#add-company', function(e){
+            var add_url = '{{path('employee_add_company')}}';
+            jQuery.ajax({
+                url: add_url,
+                success: function(response) {
+                    var content = jQuery(response).find('.company-form-conatiner').html(); 
+                    jQuery(".add-company-wrap").html(content);
+                }
+            });
+        });
+    
+        // Delete action of company list
+        jQuery(document).on("click", '.company-delete', function(e){
+            e.preventDefault();
+            var delete_url = jQuery(this).attr("href");
+            console.log(delete_url);
+            jQuery.ajax({
+                url: delete_url,
+                success: function(response) {
+                        var content = jQuery(response).find('.company-details-wrap').html(); 
+                        jQuery(".company-details-wrap").html(content);
+                },
+                error : function(xhr, textStatus, errorThrown) {
+                    alert('Ajax request failed due to :' + errorThrown);
+                }
+            });
+        });
+        
+        jQuery(document).on("click", '.company-edit', function(e){
+            e.preventDefault();
+            var edit_url = jQuery(this).attr("href");
+            console.log(edit_url);
+            jQuery.ajax({
+                url: edit_url,
+                success: function(response) {
+                    var content = jQuery(response).find('.company-form-wrap').html(); 
+                    jQuery(".companies-wrap").html(content);
+                },
+                error : function(xhr, textStatus, errorThrown) {
+                    alert('Ajax request failed due to :' + errorThrown);
+                }
+            });
+        });
+    
+        // Add company form save action
+        jQuery(document).on("click", "#employeebundle_company_save", function(e){
+
+            e.preventDefault();
+            console.log('submitting!');
+            
+            var $form = jQuery('#employeebundle_company').parent();
+            alert($form);
+            jQuery.ajax({
+                url: $form.attr('action'),
+                method: 'POST',
+                data: $form.serialize(),
+                success: function(response) {
+                    var content = jQuery(response).find('.companies-wrap').html();
+                    jQuery(".company-form-conatiner").html(content);
+                    if (jQuery('.company-form-conatiner').length === 0) {
+                        jQuery(".companies-wrap").html(content);
+                    }
+                    jQuery(".company-form-wrap").remove();
+                },
+                error : function(xhr, textStatus, errorThrown) {
+                    alert('Ajax request failed due to :' + errorThrown);
+                }
+            });
         });
     });
 </script>
