@@ -1,5 +1,6 @@
 {# empty Twig template #}
-
+{% extends "EmployeeBundle:Default:base.html.twig" %}
+{% block companyList %}
 <div class="companies-wrap">
     <h1>{{ 'List of Companies' }}</h1>
     
@@ -7,60 +8,38 @@
         <button id="add-company">Add Company</button>
     </div>
     <p>&nbsp;</p>
-    <div class="company-details">
-        <table>
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Serial No.</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-                {% for company in companies %}
+    <div id="company-details-wrap">
+        <div class="company-details">
+            <table>
+                <thead>
                 <tr>
-                    <td>{{ company.id }}</td>
-                    <td>{{ company.name }}</td>
-                    <td>{{ company.address }}</td>
-                    <td>{{ company.serialNo }}</td>
-                    <td><a href="{{ path('company_edit', {'id': company.id}) }}">{{ 'Edit' }}</a></td>
-                    <td class="company-delete">
-                        <a href="{{ path('company_delete', {'id': company.id}) }}" style="color:#f00;">
-                            {{ 'Delete' }}
-                        </a>
-                    </td>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Serial No.</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for company in companies %}
+                    <tr>
+                        <td>{{ company.id }}</td>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.address }}</td>
+                        <td>{{ company.serialNo }}</td>
+                        <td><a class="company-edit" href="{{ path('company_edit', {'id': company.id}) }}">{{ 'Edit' }}</a></td>
+                        <td>
+                            <a class="company-delete" href="{{ path('company_delete', {'id': company.id}) }}" style="color:#f00;">
+                                {{ 'Delete' }}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-<script src="{{ asset('/bundles/employee/js/jquery-3.4.1.min.js') }}"></script>
-<script>
-    jQuery('#add-company').on("click", function(e){
-        var add_url = '{{path('employee_add_company')}}'; 
-	jQuery.ajax({
-            url: add_url,
-            success: function(response) {
-                jQuery("html").html(response);
-            },
-	});
-    });
-    jQuery('.company-delete').on("click", function(e){
-	e.preventDefault();
-	var delete_url = jQuery(this).children().attr("href");
-	console.log(delete_url);
-	jQuery.ajax({
-            url: delete_url,
-            success: function(response) {
-                    jQuery("html").html(response);
-            },
-            error : function(xhr, textStatus, errorThrown) {
-                alert('Ajax request failed due to :' + errorThrown);
-            }
-	});
-    });
-</script>
+{% endblock companyList %}
+

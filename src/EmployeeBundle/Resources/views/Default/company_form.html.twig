@@ -1,26 +1,10 @@
 {# app/Resources/views/default/new.html.twig #}
-<h1>Add/Update Company</h1>
+{% extends "EmployeeBundle:Default:base.html.twig" %}
+{% block addCompany %}
+<h2>Add/Update Company</h2>
 <div class="company-form">
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
 </div>
-<script src="{{ asset('/bundles/employee/js/jquery-3.4.1.min.js') }}"></script>
-<script>
-    jQuery("#employeebundle_company_save").on("click", function(e){
-        e.preventDefault();
-        console.log('submitting!');
-        var $form = jQuery('#employeebundle_company').parent();
-        jQuery.ajax({
-            url: $form.attr('action'),
-            method: 'POST',
-            data: $form.serialize(),
-            success: function(response) {
-                jQuery("html").html(response);
-            },
-            error : function(xhr, textStatus, errorThrown) {
-                alert('Ajax request failed due to :' + errorThrown);
-            }
-        });
-    });
-</script>
+{% endblock addCompany %}

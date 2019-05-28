@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    </head>
+
+    <body>
+        <div class="container body-container">
+            {% block companyList %}{% endblock %}
+            {% block addCompany %}{% endblock%}
+        </div>
+
+
+<script src="{{ asset('/bundles/employee/js/jquery-3.4.1.min.js') }}"></script>
+<script>
+    jQuery('#add-company').on("click",function(e){
+        var add_url = '{{path('employee_add_company')}}'; 
+	jQuery.ajax({
+            url: add_url,
+            success: function(response) {
+                jQuery("#company-details-wrap").html(response);
+            }
+	});
+    });
+    jQuery('.company-delete').click(function(e){
+	e.preventDefault();
+	var delete_url = jQuery(this).attr("href");
+	console.log(delete_url);
+	jQuery.ajax({
+            url: delete_url,
+            success: function(response) {
+                    var content = jQuery(response).find('#company-details-wrap').html(); 
+                    jQuery("#company-details-wrap").html(content);
+            },
+            error : function(xhr, textStatus, errorThrown) {
+                alert('Ajax request failed due to :' + errorThrown);
+            }
+	});
+    });
+    jQuery('.company-edit').click(function(e){
+	e.preventDefault();
+	var edit_url = jQuery(this).attr("href");
+	console.log(edit_url);
+	jQuery.ajax({
+            url: edit_url,
+            success: function(response) {
+                jQuery("#company-details-wrap").html(response);
+            },
+            error : function(xhr, textStatus, errorThrown) {
+                alert('Ajax request failed due to :' + errorThrown);
+            }
+	});
+    });
+    jQuery("#employeebundle_company_save").on("click", function(e){
+        e.preventDefault();
+        console.log('submitting!');
+        var $form = jQuery('#employeebundle_company').parent();
+        jQuery.ajax({
+            url: $form.attr('action'),
+            method: 'POST',
+            data: $form.serialize(),
+            success: function(response) {
+                jQuery(".body-container").html(response);
+            },
+            error : function(xhr, textStatus, errorThrown) {
+                alert('Ajax request failed due to :' + errorThrown);
+            }
+        });
+    });
+</script>
+
+    </body>
+</html>
