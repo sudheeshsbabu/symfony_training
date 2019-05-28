@@ -33,3 +33,11 @@ company_delete:
 company_edit:
     path: /company/edit/{id}
     defaults: {_controller: EmployeeBundle:Default:editCompany }
+    
+department_show_form:
+    path: /department/add
+    defaults: { _controller: EmployeeBundle:Default:showDepartmentForm }
+    
+department_save:
+    path: /department/save
+    defaults: { _controller: EmployeeBundle:Default:saveDepartmentForm }

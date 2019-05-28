@@ -1,0 +1,9 @@
+{# empty Twig template #}
+{{ form_start(form) }}
+{{ form_end(form) }}
+<script>
+    jQuery('#{{ form.save.vars.id }}').off('click').on('click', function (e) {
+        e.preventDefault();
+        saveDepartment(jQuery(this));
+    });
+</script>

@@ -12,7 +12,10 @@ use EmployeeBundle\Entity\Company;
 use Symfony\Component\HttpFoundation\Session\Session;
 use EmployeeBundle\Repository\EmployeeRepository;
 use EmployeeBundle\Form\CompanyType;
+use EmployeeBundle\Form\DepartmentType;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DefaultController extends Controller
 {
@@ -200,5 +203,48 @@ class DefaultController extends Controller
         return $this->render('EmployeeBundle:Default:company_form.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+    
+    /**
+     * Show Department form.
+     * @return type Response
+     */
+    public function showDepartmentFormAction() {
+        $department = new Department();
+        $form = $this->createAddForm($department);
+        return $this->render('EmployeeBundle:Default:department_form.html.twig', array(
+        'form' => $form->createView(),
+        ));
+    }
+    
+    private function createAddForm($department) {
+        $form = $this->createForm(DepartmentType::class, $department, array(
+            'action' => $this->generateUrl('department_save'),
+        ));
+        $form->add('save', SubmitType::class, array(
+            'label' => 'Save Company',
+            'attr' => array('class' => 'btn btn-sm btn-success'),
+        ));
+        return $form;
+    }
+    
+    public function saveDepartmentFormAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $status = 'error';
+        $dataView = '';
+        $department = new Department();
+        $form = $this->createAddForm($department);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em->persist($department);
+            $em->flush();
+            $status = 'success';
+            $department = new Department();
+            $form = $this->createAddForm($department);
+        }
+        $formView = $this->renderView('EmployeeBundle:Default:department_form.html.twig', array(
+        'form' => $form->createView(),
+        ));
+        return new JsonResponse(['status' => $status, 'formView' => $formView]);
     }
 }

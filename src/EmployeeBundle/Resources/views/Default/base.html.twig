@@ -3,16 +3,14 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script src="{{ asset('/bundles/employee/js/jquery-3.4.1.min.js') }}"></script>
     </head>
-
     <body>
         <div class="container body-container">
             {% block companyList %}{% endblock %}
             {% block addCompany %}{% endblock%}
+            {% block departmentForm %}{% endblock %}
         </div>
-
-
-<script src="{{ asset('/bundles/employee/js/jquery-3.4.1.min.js') }}"></script>
 <script>
     jQuery(document).ready(function() {
         
@@ -85,7 +83,34 @@
             });
         });
     });
+    
+    /**
+     * Save action of department form. 
+     * @param {type} element
+     * @returns {undefined}     */
+    function saveDepartment(element) {
+        var form = jQuery(element).closest('form');
+        var data = jQuery(form).serialize();
+        var url = jQuery(form).attr('action');
+        jQuery.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            success: function (res) {
+                if (res.status === 'success') {
+                    alert('Success!');
+                } else {
+                    alert('Some error occured!');
+                }
+                jQuery('#form-div').html(res.formView);
+            },
+            error: function (res) {
+                alert('Some error occured');
+                return false;
+            }
+        });
+    }
 </script>
-
     </body>
 </html>
