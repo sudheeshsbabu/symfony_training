@@ -15,6 +15,7 @@
 <script src="{{ asset('/bundles/employee/js/jquery-3.4.1.min.js') }}"></script>
 <script>
     jQuery(document).ready(function() {
+        
         // Add company action for company list page.
         jQuery(document).on("click", '#add-company', function(e){
             var add_url = '{{path('employee_add_company')}}';
@@ -44,6 +45,7 @@
             });
         });
         
+        // Edit action of company list
         jQuery(document).on("click", '.company-edit', function(e){
             e.preventDefault();
             var edit_url = jQuery(this).attr("href");
@@ -62,12 +64,9 @@
     
         // Add company form save action
         jQuery(document).on("click", "#employeebundle_company_save", function(e){
-
             e.preventDefault();
-            console.log('submitting!');
-            
+            console.log('submitting!'); 
             var $form = jQuery('#employeebundle_company').parent();
-            alert($form);
             jQuery.ajax({
                 url: $form.attr('action'),
                 method: 'POST',
