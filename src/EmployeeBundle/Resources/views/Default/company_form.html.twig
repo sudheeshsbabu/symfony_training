@@ -1,10 +1,13 @@
 {# app/Resources/views/default/new.html.twig #}
 {% extends "EmployeeBundle:Default:base.html.twig" %}
 {% block addCompany %}
-<h2>Add/Update Company</h2>
-<div class="company-form">
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
-</div>
+    <div class="companies-wrap"></div>
+    <div class="company-form-wrap">
+        <h2>Add/Update Company</h2>
+        <div class="company-form">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock addCompany %}

@@ -30,8 +30,8 @@
 	jQuery.ajax({
             url: delete_url,
             success: function(response) {
-                    var content = jQuery(response).find('#company-details-wrap').html(); 
-                    jQuery("#company-details-wrap").html(content);
+                    var content = jQuery(response).find('.company-details-wrap').html(); 
+                    jQuery(".company-details-wrap").html(content);
             },
             error : function(xhr, textStatus, errorThrown) {
                 alert('Ajax request failed due to :' + errorThrown);
@@ -45,7 +45,8 @@
 	jQuery.ajax({
             url: edit_url,
             success: function(response) {
-                jQuery("#company-details-wrap").html(response);
+                var content = jQuery(response).find('.company-form-wrap').html(); 
+                jQuery(".companies-wrap").html(content);
             },
             error : function(xhr, textStatus, errorThrown) {
                 alert('Ajax request failed due to :' + errorThrown);
@@ -61,7 +62,9 @@
             method: 'POST',
             data: $form.serialize(),
             success: function(response) {
-                jQuery(".body-container").html(response);
+                var content = jQuery(response).find('.companies-wrap').html(); 
+                jQuery(".companies-wrap").html(content);
+                jQuery(".company-form-wrap").remove();
             },
             error : function(xhr, textStatus, errorThrown) {
                 alert('Ajax request failed due to :' + errorThrown);
