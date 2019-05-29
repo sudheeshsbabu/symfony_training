@@ -49,3 +49,11 @@ departments_list:
 department_delete:
     path: /department/delete/{id}
     defaults: {_controller: EmployeeBundle:Default:deleteDepartment }
+
+department_edit:
+    path: /department/edit/{id}
+    defaults: {_controller: EmployeeBundle:Default:editDepartment }
+    
+department_edit_save:
+    path: /department/edit/{id}/save
+    defaults: { _controller: EmployeeBundle:Default:editSaveDepartmentForm }

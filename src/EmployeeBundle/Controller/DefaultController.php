@@ -127,14 +127,14 @@ class DefaultController extends Controller
         $form = $this->createForm(CompanyType::class, $company);
 
         $form->handleRequest($request);
-        
+    
         // Validate Serial number & set error message if necessary.
         $serialNo = $form['serialNo']->getData();
         if ($form->isSubmitted() && !is_numeric($serialNo)) {
             $error = new FormError('Serial no should be numeric');
             $form['serialNo']->addError($error);
         }
-
+      
         if ($form->isSubmitted() && $form->isValid()) {
             $company = $form->getData();
 //            dump($company);
@@ -222,13 +222,17 @@ class DefaultController extends Controller
         'form' => $form->createView(),
         ));
     }
-    
+    /**
+     * Department add form
+     * @param type $department
+     * @return type
+     */
     private function createAddForm($department) {
         $form = $this->createForm(DepartmentType::class, $department, array(
             'action' => $this->generateUrl('department_save'),
         ));
         $form->add('save', SubmitType::class, array(
-            'label' => 'Save Company',
+            'label' => 'Save Department',
             'attr' => array('class' => 'btn btn-sm btn-success'),
         ));
         return $form;
@@ -257,7 +261,7 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
 
-        return new JsonResponse(['status' => $status, 'formView' => $formView]);;
+        return new JsonResponse(['status' => $status, 'formView' => $formView]);
     }
     
     /**
@@ -286,5 +290,54 @@ class DefaultController extends Controller
         $entityManager->flush();
         
         return $this->redirectToRoute('departments_list');
+    }
+    
+    /**
+     * Edit a record in Department table.
+     * @param Request $request
+     * @param integer $id
+     * @return Response
+     */
+    public function editDepartmentAction(Request $request, $id) {
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $department = $entityManager->getRepository('EmployeeBundle:Department')->find($id);
+        
+        // Set the comapany record to the form
+        $form = $this->createEditForm($department, $id);
+        return $this->render('EmployeeBundle:Default:department_form.html.twig', array(
+        'form' => $form->createView(),
+        ));
+    }
+    
+    private function createEditForm($department, $id) {
+        $form = $this->createForm(DepartmentType::class, $department, array(
+            'action' => $this->generateUrl('department_edit_save', array('id' => $id)),
+        ));
+        $form->add('save', SubmitType::class, array(
+            'label' => 'Edit Department',
+            'attr' => array('class' => 'btn btn-sm btn-success'),
+        ));
+        return $form;
+    }
+    
+    public function editSaveDepartmentFormAction(Request $request, $id) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $status = 'error';
+        $dataView = '';
+        $department = $entityManager->getRepository('EmployeeBundle:Department')->find($id);
+        $form = $this->createEditForm($department, $id);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $department = $entityManager->getRepository('EmployeeBundle:Department')->find($id);
+            $entityManager->getRepository('EmployeeBundle:Department')->updateDepartment($department);
+            $status = 'success';
+            $form = $this->createEditForm($department, $id);
+        }
+        $formView = $this->renderView('EmployeeBundle:Default:department_form.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
+        return new JsonResponse(['status' => $status, 'formView' => $formView]);
     }
 }

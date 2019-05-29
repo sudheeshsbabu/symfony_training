@@ -26,7 +26,7 @@
                         <td>{{ department.id }}</td>
                         <td>{{ department.name }}</td>
                         <td>{{ department.description }}</td>
-                        <td><a class="department-edit" href="{#{ path('department_edit', {'id': department.id}) }#}">{{ 'Edit' }}</a></td>
+                        <td><a class="department-edit" href="{{ path('department_edit', {'id': department.id}) }}">{{ 'Edit' }}</a></td>
                         <td>
                             <a class="department-delete" href="{{ path('department_delete', {'id': department.id}) }}" style="color:#f00;">
                                 {{ 'Delete' }}

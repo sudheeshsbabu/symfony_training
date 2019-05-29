@@ -111,6 +111,24 @@
                 }
             });
         });
+        
+        // Edit action of department list
+        jQuery(document).on("click", '.department-edit', function(e){
+            e.preventDefault();
+            var edit_url = jQuery(this).attr("href");
+            var row= jQuery(this).parent();
+            jQuery.ajax({
+                url: edit_url,
+                success: function(response) {
+                    //alert(response);
+                    var content = jQuery(response).find('#department-form-div').html(); 
+                    row.html(content);
+                },
+                error : function(xhr, textStatus, errorThrown) {
+                    alert('Ajax request failed due to :' + errorThrown);
+                }
+            });
+        });
     });
     
     /**
