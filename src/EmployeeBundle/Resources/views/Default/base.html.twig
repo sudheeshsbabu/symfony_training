@@ -10,6 +10,7 @@
             {% block companyList %}{% endblock %}
             {% block addCompany %}{% endblock%}
             {% block departmentForm %}{% endblock %}
+            {% block departmentList %}{% endblock %}
         </div>
 <script>
     jQuery(document).ready(function() {
@@ -98,12 +99,14 @@
             data: data,
             dataType: 'json',
             success: function (res) {
+                // res is a json object which contains status and form datas
                 if (res.status === 'success') {
-                    alert('Success!');
+                   alert('Success!');
                 } else {
-                    alert('Some error occured!');
+                   alert('Some error occured!');
                 }
-                jQuery('#form-div').html(res.formView);
+                var content = jQuery(res.formView).find('#department-form-div').html();
+                jQuery('#department-form-div').html(content);
             },
             error: function (res) {
                 alert('Some error occured');

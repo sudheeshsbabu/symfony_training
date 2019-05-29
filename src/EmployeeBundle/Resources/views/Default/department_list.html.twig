@@ -1,0 +1,42 @@
+{# empty Twig template #}
+{% extends "EmployeeBundle:Default:base.html.twig" %}
+{% block departmentList %}
+<div class="departments-wrap">
+    <h1>{{ 'List of Companies' }}</h1>
+    
+    <div class="add-department-wrap">
+        <button id="add-department">Add Company</button>
+    </div>
+    <p>&nbsp;</p>
+    <div class="department-details-wrap">
+        <div class="department-details">
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for department in departments %}
+                    <tr>
+                        <td>{{ department.id }}</td>
+                        <td>{{ department.name }}</td>
+                        <td>{{ department.description }}</td>
+                        <td><a class="department-edit" href="{#{ path('department_edit', {'id': department.id}) }#}">{{ 'Edit' }}</a></td>
+                        <td>
+                            <a class="department-delete" href="{#{ path('department_delete', {'id': department.id}) }#}" style="color:#f00;">
+                                {{ 'Delete' }}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock departmentList %}

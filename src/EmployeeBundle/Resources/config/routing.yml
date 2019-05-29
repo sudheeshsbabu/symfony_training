@@ -41,3 +41,7 @@ department_show_form:
 department_save:
     path: /department/save
     defaults: { _controller: EmployeeBundle:Default:saveDepartmentForm }
+    
+departments_list:
+    path: /department/list
+    defaults: { _controller: EmployeeBundle:Default:listDepartments }

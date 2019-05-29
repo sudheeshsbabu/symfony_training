@@ -177,6 +177,12 @@ class DefaultController extends Controller
         return $this->redirectToRoute('employe_list_companies');
     }
     
+    /**
+     * Edit a record in Company table.
+     * @param Request $request
+     * @param integer $id
+     * @return Response
+     */
     public function editCompanyAction(Request $request, $id) {
         
         $entityManager = $this->getDoctrine()->getManager();
@@ -228,6 +234,11 @@ class DefaultController extends Controller
         return $form;
     }
     
+    /**
+     * Department form save action.
+     * @param Request $request
+     * @return type
+     */
     public function saveDepartmentFormAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $status = 'error';
@@ -243,8 +254,19 @@ class DefaultController extends Controller
             $form = $this->createAddForm($department);
         }
         $formView = $this->renderView('EmployeeBundle:Default:department_form.html.twig', array(
-        'form' => $form->createView(),
+            'form' => $form->createView(),
         ));
-        return new JsonResponse(['status' => $status, 'formView' => $formView]);
+
+        return new JsonResponse(['status' => $status, 'formView' => $formView]);;
+    }
+    
+    public function listDepartmentsAction() {
+       $entityManager = $this->getDoctrine()->getManager();
+       $departments = $entityManager->getRepository('EmployeeBundle:Department')->findAll();
+       if (!empty($departments)) {
+           return $this->render('EmployeeBundle:Default:department_list.html.twig', array(
+               'departments' => $departments
+           ));
+       }
     }
 }
