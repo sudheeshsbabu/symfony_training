@@ -45,3 +45,7 @@ department_save:
 departments_list:
     path: /department/list
     defaults: { _controller: EmployeeBundle:Default:listDepartments }
+
+department_delete:
+    path: /department/delete/{id}
+    defaults: {_controller: EmployeeBundle:Default:deleteDepartment }

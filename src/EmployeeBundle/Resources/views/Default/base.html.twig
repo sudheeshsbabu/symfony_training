@@ -95,6 +95,22 @@
                 }
             });
         });
+        
+        // Delete action of company list
+        jQuery(document).on("click", '.department-delete', function(e){
+            e.preventDefault();
+            var delete_url = jQuery(this).attr("href");
+            jQuery.ajax({
+                url: delete_url,
+                success: function(response) {
+                        var content = jQuery(response).find('.departments-wrap').html(); 
+                        jQuery(".departments-wrap").html(content);
+                },
+                error : function(xhr, textStatus, errorThrown) {
+                    alert('Ajax request failed due to :' + errorThrown);
+                }
+            });
+        });
     });
     
     /**

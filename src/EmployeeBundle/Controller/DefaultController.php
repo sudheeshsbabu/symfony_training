@@ -260,6 +260,10 @@ class DefaultController extends Controller
         return new JsonResponse(['status' => $status, 'formView' => $formView]);;
     }
     
+    /**
+     * List departments.
+     * @return type
+     */
     public function listDepartmentsAction() {
        $entityManager = $this->getDoctrine()->getManager();
        $departments = $entityManager->getRepository('EmployeeBundle:Department')->findAll();
@@ -268,5 +272,19 @@ class DefaultController extends Controller
                'departments' => $departments
            ));
        }
+    }
+    
+    /**
+     * Delete a company.
+     * @param type integer
+     * @return type Response
+     */
+    public function deleteDepartmentAction($id) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $department = $entityManager->getRepository('EmployeeBundle:Department')->find($id);
+        $entityManager->remove($department);
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('departments_list');
     }
 }
