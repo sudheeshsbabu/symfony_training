@@ -120,7 +120,6 @@
             jQuery.ajax({
                 url: edit_url,
                 success: function(response) {
-                    //alert(response);
                     var content = jQuery(response).find('#department-form-div').html(); 
                     row.html(content);
                 },
@@ -147,7 +146,7 @@
             success: function (res) {
                 // res is a json object which contains status and form datas
                 if (res.status === 'success') {
-                   alert('Success!');
+                   alert('Success! Reloading page to show the updated list');
                 } else {
                    alert('Some error occured!');
                 }

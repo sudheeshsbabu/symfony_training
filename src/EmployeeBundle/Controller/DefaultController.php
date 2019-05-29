@@ -310,6 +310,12 @@ class DefaultController extends Controller
         ));
     }
     
+    /**
+     * Create edit form for department with existing data of an entry.
+     * @param Department $department
+     * @param integer $id
+     * @return Form
+     */
     private function createEditForm($department, $id) {
         $form = $this->createForm(DepartmentType::class, $department, array(
             'action' => $this->generateUrl('department_edit_save', array('id' => $id)),
@@ -321,6 +327,12 @@ class DefaultController extends Controller
         return $form;
     }
     
+    /**
+     * Save the updated data of the department edit form.
+     * @param Request $request
+     * @param type $id
+     * @return JsonResponse
+     */
     public function editSaveDepartmentFormAction(Request $request, $id) {
         $entityManager = $this->getDoctrine()->getManager();
         $status = 'error';
