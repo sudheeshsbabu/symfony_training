@@ -83,6 +83,18 @@
                 }
             });
         });
+        
+        // Add department form for department list page.
+        jQuery(document).on("click", '#add-department', function(e){
+            var add_url = '{{path('department_show_form')}}';
+            jQuery.ajax({
+                url: add_url,
+                success: function(response) {
+                    var content = jQuery(response).find('#department-form-div').html(); 
+                    jQuery(".add-department-wrap").html(content);
+                }
+            });
+        });
     });
     
     /**
@@ -105,8 +117,8 @@
                 } else {
                    alert('Some error occured!');
                 }
-                var content = jQuery(res.formView).find('#department-form-div').html();
-                jQuery('#department-form-div').html(content);
+                // Reloading the page to show the updated department list
+                location.reload();
             },
             error: function (res) {
                 alert('Some error occured');
