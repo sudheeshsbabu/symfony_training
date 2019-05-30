@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use EmployeeBundle\Repository\EmployeeRepository;
 use EmployeeBundle\Form\CompanyType;
 use EmployeeBundle\Form\DepartmentType;
+use EmployeeBundle\Form\EmployeeType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -351,5 +352,39 @@ class DefaultController extends Controller
         ));
 
         return new JsonResponse(['status' => $status, 'formView' => $formView]);
+    }
+    
+    public function addEmployeeAction(Request $request)
+    {     
+        $employee = new Employee();
+
+        $form = $this->createAddFormEmployee($employee);
+        $form_view = $form->createView();
+
+//        $form->handleRequest($request);
+//      
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $company = $form->getData();
+//            $entityManager = $this->getDoctrine()->getManager();
+//            $entityManager->persist($company);
+//            $entityManager->flush();
+//
+//            return $this->redirectToRoute('employe_list_companies');
+//        }
+//
+        return $this->render('EmployeeBundle:Default:employee_form.html.twig', [
+            'form' => $form_view,
+        ]);
+    }
+    
+    private function createAddFormEmployee($employee) {
+        $form = $this->createForm(EmployeeType::class, $employee);/*, array(
+            'action' => $this->generateUrl('department_save'),
+        ));*/
+        $form->add('save', SubmitType::class, array(
+            'label' => 'Save Department',
+            'attr' => array('class' => 'btn btn-sm btn-success'),
+        ));
+        return $form;
     }
 }

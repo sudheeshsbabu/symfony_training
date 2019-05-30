@@ -57,3 +57,7 @@ department_edit:
 department_edit_save:
     path: /department/edit/{id}/save
     defaults: { _controller: EmployeeBundle:Default:editSaveDepartmentForm }
+    
+employee_add:
+    path: /employee/add
+    defaults: { _controller: EmployeeBundle:Default:addEmployee }

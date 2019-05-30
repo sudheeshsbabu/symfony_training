@@ -1,0 +1,12 @@
+{% extends "EmployeeBundle:Default:base.html.twig" %}
+{% block employeeForm %}
+    <h1>{{ 'Employee form' }}</h1>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div id="employee-form-div">
+                {{ form_start(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock employeeForm %}
