@@ -49,7 +49,7 @@ class Employee {
     /**
      * @var string $salary
      * 
-     * @ORM\Column(type="string", length=20, nullable=false)
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $salary;
 

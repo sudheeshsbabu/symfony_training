@@ -32,4 +32,17 @@ class EmployeeRepository extends \Doctrine\ORM\EntityRepository {
 
         return $query;
     }
+    
+    /**
+     * Fetches the maximum salary.
+     * @return array $query
+     */
+    public function getMaxEmployeeSalary() {
+        $query = $this->createQueryBuilder('e')
+        ->select('max(e.salary)')
+        ->getQuery()
+        ->getResult();
+        
+        return $query;
+    }
 }

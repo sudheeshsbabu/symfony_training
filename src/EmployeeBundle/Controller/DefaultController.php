@@ -66,12 +66,18 @@ class DefaultController extends Controller
      * Function to list all employees.
      */
     public function getEmployeesAction() {
-        $entityManager = $this->getDoctrine()->getManager();
-        $employees = $entityManager->getRepository('EmployeeBundle:Employee')->findAll();
+//        $entityManager = $this->getDoctrine()->getManager();
+//        $employees = $entityManager->getRepository('EmployeeBundle:Employee')->findAll();
+        
+        // Fetching employee details via service.
+        $employees = $this->container->get('employees.Details')->getEmployees();
+        
+        // Fetch max salary of employee
+        $maxSalary = $this->container->get('employees.Details')->maxSalary();
 
         return $this->render(
-                'EmployeeBundle:Default:employee-list.html.twig', 
-                ['employees' => $employees]
+                'EmployeeBundle:Default:employee_list.html.twig', 
+                ['employees' => $employees, 'maxSalary' => $maxSalary[0][1]]
         );
     }    
     

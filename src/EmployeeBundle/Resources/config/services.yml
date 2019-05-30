@@ -5,3 +5,7 @@ services:
     employee.message:
         class: EmployeeBundle\Service\MessageGenerator
         arguments: []
+   
+    employees.Details:
+        class: EmployeeBundle\Service\Employees
+        arguments: ['@doctrine.orm.entity_manager']

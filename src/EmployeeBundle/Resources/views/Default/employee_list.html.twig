@@ -15,6 +15,7 @@
                     <th>Salary</th>
                     <th>Company</th>
                     <th>Designation</th>
+                    <th>Difference from maximum salary</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,7 @@
                         <td>{{ employee.salary }}</td>
                         <td>{{ employee.companyId.name }}</td>
                         <td>{{ employee.designationId.name }}</td>
+                        <td>{{ maxSalary - employee.salary  }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

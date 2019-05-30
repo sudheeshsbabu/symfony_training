@@ -26,4 +26,8 @@ class MessageGenerator {
         $index = array_rand($messages);
         return $messages[$index];
     }
+    
+    public function maxSalary() {
+        
+    }
 }
