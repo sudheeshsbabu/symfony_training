@@ -2,3 +2,6 @@ services:
 #    employee.example:
 #        class: EmployeeBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    employee.message:
+        class: EmployeeBundle\Service\MessageGenerator
+        arguments: []

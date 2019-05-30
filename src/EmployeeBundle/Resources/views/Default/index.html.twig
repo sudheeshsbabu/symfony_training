@@ -1,1 +1,11 @@
-{{ 'Hello World' }}
+    <body>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% set service_message = employeeService.getHappyMessage() %}
+        <div id="service-message">
+            {{ service_message }}
+        </div>
+    </body>

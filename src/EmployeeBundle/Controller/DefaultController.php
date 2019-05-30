@@ -22,6 +22,8 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+        $message = $this->container->get('employee.message')->getHappyMessage();
+         $this->addFlash('success', $message);
         return $this->render('EmployeeBundle:Default:index.html.twig');
     }
     
