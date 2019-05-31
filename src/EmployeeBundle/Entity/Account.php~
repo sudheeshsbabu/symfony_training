@@ -1,0 +1,56 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+namespace EmployeeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+* @ORM\Table(name="account")
+* @ORM\Entity
+*/
+class Account {
+	
+    /**
+	 * @var integer $id
+	 * @ORM\Column(type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 */
+    private $id;
+    
+    /**
+     * @var integer $accountNumber
+     * 
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $accountNumber;
+    
+    /**
+     * @var integer $customerCode
+     *
+     * @ORM\ManyToOne(targetEntity="Customer")
+     * @ORM\JoinColumn(name="customer_code", referencedColumnName="code", nullable=false)
+     */
+    private $customerCode;
+
+    /**
+     * @var integer $balance
+     * 
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $balance;
+    
+    /**
+     * @var integer $accountType
+     *
+     * @ORM\ManyToOne(targetEntity="AccountType")
+     * @ORM\JoinColumn(name="account_type", referencedColumnName="id", nullable=false)
+     */
+    private $accountType;
+}

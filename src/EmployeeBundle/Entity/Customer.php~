@@ -1,0 +1,54 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+namespace EmployeeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+* @ORM\Table(name="customer")
+* @ORM\Entity
+*/
+class Customer {
+
+	/**
+	 * @var integer $id
+	 * @ORM\Column(type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 */
+    private $id;
+    
+    /**
+     * @var integer $code
+     * 
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $code;
+
+	/**
+	 * @var string $name
+	 *
+	 * @ORM\Column(type="string", length=100, nullable=false)
+	 */
+    private $name;
+    
+    /**
+	 * @var string $address
+	 *
+	 * @ORM\Column(type="text")
+	 */
+    private $address;
+    
+    /**
+	 * @var string $city
+	 *
+	 * @ORM\Column(type="string", length=100, nullable=false)
+	 */
+	private $city;
+}
