@@ -11,9 +11,10 @@ namespace EmployeeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* @ORM\Table(name="customer")
-* @ORM\Entity
-*/
+ * @ORM\Table(name="customer")
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
+ */
 class Customer {
 
 	/**
@@ -51,4 +52,127 @@ class Customer {
 	 * @ORM\Column(type="string", length=100, nullable=false)
 	 */
 	private $city;
-}
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set code
+     *
+     * @param integer $code
+     *
+     * @return Customer
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return integer
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Customer
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return Customer
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return Customer
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCodeValue()
+    {
+        $this->code = mt_rand(10000,99999);
+    }
+    
+    /**
+     * Generates the magic method
+     * 
+     */
+    public function __toString(){
+        $value = (string)$this->code;
+        return $value;
+    }
+ }

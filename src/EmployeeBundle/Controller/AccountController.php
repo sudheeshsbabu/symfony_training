@@ -93,10 +93,12 @@ class AccountController extends Controller {
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em->persist($account);
+//            dump($account);
+//            die;
             $em->flush();
             $status = 'success';
             $account = new Account();
-            $form = $this->createAddForm($account);
+            $form = $this->createAddAccountForm($account);
         }
         $formView = $this->renderView('EmployeeBundle:Default:department_form.html.twig', array(
             'form' => $form->createView(),

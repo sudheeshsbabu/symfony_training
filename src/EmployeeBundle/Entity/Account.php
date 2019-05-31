@@ -32,10 +32,9 @@ class Account {
     private $accountNumber;
     
     /**
-     * @var integer $customerCode
      *
      * @ORM\ManyToOne(targetEntity="Customer")
-     * @ORM\JoinColumn(name="customer_code", referencedColumnName="code", nullable=false)
+     * @ORM\JoinColumn(name="customer_code", referencedColumnName="id", nullable=false)
      */
     private $customerCode;
 
@@ -47,10 +46,9 @@ class Account {
     private $balance;
     
     /**
-     * @var integer $accountType
      *
      * @ORM\ManyToOne(targetEntity="AccountType")
-     * @ORM\JoinColumn(name="account_type", referencedColumnName="name", nullable=false)
+     * @ORM\JoinColumn(name="account_type", referencedColumnName="id", nullable=false)
      */
     private $accountType;
 

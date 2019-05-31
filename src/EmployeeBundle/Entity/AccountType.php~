@@ -30,4 +30,47 @@ class AccountType {
 	* @ORM\Column(type="string", length=20, nullable=false)
 	*/
 	private $name;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return AccountType
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    /**
+     * Generates the magic method
+     * 
+     */
+    public function __toString(){
+        $value = (string)$this->name;
+        return $value;
+    }
 }
