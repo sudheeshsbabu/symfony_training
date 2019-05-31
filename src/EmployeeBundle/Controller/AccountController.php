@@ -113,4 +113,72 @@ class AccountController extends Controller {
 
         return new JsonResponse(['status' => $status, 'formView' => $formView]);
     }
+    
+    /**
+     * Edit a record in account table.
+     * @param Request $request
+     * @param integer $id
+     * @return Response
+     */
+    public function editAccountAction(Request $request, $id) {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $account = $entityManager->getRepository('EmployeeBundle:Account')->find($id);
+        
+        // Set the comapany record to the form
+        $form = $this->createEditAccountForm($account, $id);
+        return $this->render('EmployeeBundle:Account:account_form.html.twig', array(
+        'form' => $form->createView(),
+        ));
+    }
+    
+    /**
+     * Create edit form for account with existing data of an entry.
+     * @param Account $account
+     * @param integer $id
+     * @return Form
+     */
+    private function createEditAccountForm($account, $id) {
+        $form = $this->createForm(AccountType::class, $account, array(
+            'action' => $this->generateUrl('account_edit_save', array('id' => $id)),
+        ));
+        $form->add('save', SubmitType::class, array(
+            'label' => 'Save Account',
+            'attr' => array('class' => 'btn btn-sm btn-success'),
+        ));
+        return $form;
+    }
+    
+    /**
+     * Save the updated data of the department edit form.
+     * @param Request $request
+     * @param type $id
+     * @return JsonResponse
+     */
+    public function editSaveAccountFormAction(Request $request, $id) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $status = 'error';
+        $account = $entityManager->getRepository('EmployeeBundle:Account')->find($id);
+        $form = $this->createEditAccountForm($account, $id);
+        $form->handleRequest($request);
+        // Validate the form
+        if ($form->isSubmitted()) {
+            $customerCode = $form['customerCode']->getData();
+            if (empty($customerCode)) {
+                $error = new FormError('Please select a Customer Code');
+                $form['customerCode']->addError($error);
+            }
+        }
+        if ($form->isValid()) {
+            $account = $entityManager->getRepository('EmployeeBundle:Account')->find($id);
+            $entityManager->getRepository('EmployeeBundle:Account')->updateAccount($account);
+            $status = 'success';
+            $form = $this->createEditAccountForm($account, $id);
+        }
+        $formView = $this->renderView('EmployeeBundle:Account:account_form.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
+        return new JsonResponse(['status' => $status, 'formView' => $formView]);
+    }
 }

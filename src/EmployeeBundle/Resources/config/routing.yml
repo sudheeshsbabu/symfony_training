@@ -73,3 +73,11 @@ account_add:
 account_permission:
     path: /account/permission
     defaults: { _controller: EmployeeBundle:Account:index }
+    
+account_edit:
+    path: /admin/account/edit/{id}
+    defaults: {_controller: EmployeeBundle:Account:editAccount }
+
+account_edit_save:
+    path: /admin/account/edit/{id}/save
+    defaults: {_controller: EmployeeBundle:Account:editSaveAccountForm }
