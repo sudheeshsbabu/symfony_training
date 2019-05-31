@@ -1,0 +1,46 @@
+{# empty Twig template #}
+{% extends "EmployeeBundle:Default:base.html.twig" %}
+{% block accountList %}
+<div class="accounts-wrap">
+    <h1>{{ 'List of Companies' }}</h1>
+    
+    <div class="add-account-wrap">
+        <a href="{{ path('account_add') }}"><button id="add-account">Add Department</button></a>
+    </div>
+    <p>&nbsp;</p>
+    <div class="account-details-wrap">
+        <div class="account-details">
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Account Number</th>
+                    <th>Customer Code</th>
+                    <th>Balance</th>
+                    <th>Account Type</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for account in accounts %}
+                    <tr>
+                        <td>{{ account.id }}</td>
+                        <td>{{ account.accountNumber }}</td>
+                        <td>{{ account.customerCode }}</td>
+                        <td>{{ account.balance }}</td>
+                        <td>{{ account.accountType }}</td>
+                        <td><a class="account-edit" href="{{ path('account_edit', {'id': account.id}) }}">{{ 'Edit' }}</a></td>
+                        <td>
+                            <a class="account-delete" href="{{ path('account_delete', {'id': account.id}) }}" style="color:#f00;">
+                                {{ 'Delete' }}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock accountList %}

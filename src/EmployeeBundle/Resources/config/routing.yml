@@ -81,3 +81,11 @@ account_edit:
 account_edit_save:
     path: /admin/account/edit/{id}/save
     defaults: {_controller: EmployeeBundle:Account:editSaveAccountForm }
+
+accounts_list:
+    path: /admin/accounts/list
+    defaults: { _controller: EmployeeBundle:Account:listAccounts }
+    
+account_delete:
+    path: /admin/account/delete/{id}
+    defaults: {_controller: EmployeeBundle:Account:deleteAccount }

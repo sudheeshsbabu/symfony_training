@@ -181,4 +181,32 @@ class AccountController extends Controller {
 
         return new JsonResponse(['status' => $status, 'formView' => $formView]);
     }
+    
+    /**
+     * List Accounts.
+     * @return type
+     */
+    public function listAccountsAction() {
+       $entityManager = $this->getDoctrine()->getManager();
+       $accounts = $entityManager->getRepository('EmployeeBundle:Account')->findAll();
+       if (!empty($accounts)) {
+           return $this->render('EmployeeBundle:Account:account_list.html.twig', array(
+               'accounts' => $accounts
+           ));
+       }
+    }
+    
+    /**
+     * Delete a account.
+     * @param type integer
+     * @return type Response
+     */
+    public function deleteAccountAction($id) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $account = $entityManager->getRepository('EmployeeBundle:Account')->find($id);
+        $entityManager->remove($account);
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('accounts_list');
+    }
 }
