@@ -160,6 +160,32 @@
             }
         });
     }
+    
+    function saveAccount(element) {
+        var form = jQuery(element).closest('form');
+        var data = jQuery(form).serialize();
+        var url = jQuery(form).attr('action');
+        jQuery.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            success: function (res) {
+                // res is a json object which contains status and form datas
+                if (res.status === 'success') {
+                   alert('Success!');
+                } else {
+                   alert('Some error occured!');
+                }
+                // Reloading the page to show the updated department list
+                //location.reload();
+            },
+            error: function (res) {
+                alert('Some error occured');
+                return false;
+            }
+        });
+    }
 </script>
     </body>
 </html>

@@ -1,0 +1,12 @@
+{# empty Twig template #}
+{% extends "EmployeeBundle:Default:base.html.twig" %}
+{% block departmentForm %}
+    <h1>{{ 'Add Account' }}</h1>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div id="account-form-div">
+                {% include 'EmployeeBundle:Account:account_form_content.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock departmentForm %}

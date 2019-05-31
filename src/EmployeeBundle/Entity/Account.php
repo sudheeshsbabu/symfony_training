@@ -50,7 +50,7 @@ class Account {
      * @var integer $accountType
      *
      * @ORM\ManyToOne(targetEntity="AccountType")
-     * @ORM\JoinColumn(name="account_type", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="account_type", referencedColumnName="name", nullable=false)
      */
     private $accountType;
 

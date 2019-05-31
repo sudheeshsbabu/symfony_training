@@ -166,4 +166,13 @@ class Customer {
     {
         $this->code = mt_rand(10000,99999);
     }
+    
+    /**
+     * Generates the magic method
+     * 
+     */
+    public function __toString(){
+        $value = (string)$this->code;
+        return $value;
+    }
  }

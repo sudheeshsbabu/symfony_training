@@ -61,3 +61,15 @@ department_edit_save:
 employee_add:
     path: /employee/add
     defaults: { _controller: EmployeeBundle:Default:addEmployee }
+
+account_save:
+    path: /admin/account/save
+    defaults: { _controller: EmployeeBundle:Account:saveAccountForm }
+
+account_add:
+    path: /admin/account/add
+    defaults: { _controller: EmployeeBundle:Account:addAccount }
+    
+account_permission:
+    path: /account/permission
+    defaults: { _controller: EmployeeBundle:Account:index }

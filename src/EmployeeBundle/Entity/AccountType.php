@@ -64,4 +64,13 @@ class AccountType {
     {
         return $this->name;
     }
+    
+    /**
+     * Generates the magic method
+     * 
+     */
+    public function __toString(){
+        $value = (string)$this->name;
+        return $value;
+    }
 }
