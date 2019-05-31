@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use EmployeeBundle\Form\AccountType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Form\FormError;
 
 /**
  * Description of AccountController
@@ -91,16 +92,22 @@ class AccountController extends Controller {
         $account = new Account();
         $form = $this->createAddAccountForm($account);
         $form->handleRequest($request);
+        // Validate the form
+        if ($form->isSubmitted()) {
+            $customerCode = $form['customerCode']->getData();
+            if (empty($customerCode)) {
+                $error = new FormError('Please select a Customer Code');
+                $form['customerCode']->addError($error);
+            }
+        }
         if ($form->isValid()) {
             $em->persist($account);
-//            dump($account);
-//            die;
             $em->flush();
             $status = 'success';
             $account = new Account();
             $form = $this->createAddAccountForm($account);
         }
-        $formView = $this->renderView('EmployeeBundle:Default:department_form.html.twig', array(
+        $formView = $this->renderView('EmployeeBundle:Account:account_form.html.twig', array(
             'form' => $form->createView(),
         ));
 

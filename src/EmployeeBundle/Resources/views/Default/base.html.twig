@@ -177,11 +177,11 @@
                 } else {
                    alert('Some error occured!');
                 }
-                // Reloading the page to show the updated department list
-                //location.reload();
+                var content = jQuery(res.formView).find('#account-form-div').html();
+                jQuery('#account-form-div').html(content);
             },
             error: function (res) {
-                alert('Some error occured');
+                alert('Some error occured22');
                 return false;
             }
         });
