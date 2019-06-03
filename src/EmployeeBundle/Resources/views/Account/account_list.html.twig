@@ -6,7 +6,8 @@
     <div class="search-account-wrap">
          <form id="accounts-search-form" action="{{ path('accounts_search') }}">
             <input type="text" class="form-control" placeholder="Search" name ="find" required>
-            <button type="submit" class="btn btn-default">Search</button>
+            <button type="submit" id="accounts-search" class="btn btn-default">Search</button>
+            <div id="search-result"></div>
         </form>
     </div>
     <p>&nbsp;</p>

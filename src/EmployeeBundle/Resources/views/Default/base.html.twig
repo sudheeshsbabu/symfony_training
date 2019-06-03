@@ -130,6 +130,26 @@
                 }
             });
         });
+        
+        /**
+         * AJAX implementation of search.
+         */
+        jQuery('.search-account-wrap').on("click", '#accounts-search', function(e) {
+            e.preventDefault();
+            var actionUrl = '{{ path('accounts_search') }}';
+            var form = jQuery(this).parent();
+            jQuery.ajax({
+                url: actionUrl,
+                type: "GET",
+                data:  form.serialize(),
+                success: function(response) {
+                    jQuery('#search-result').html(response);
+                },
+                error : function(xhr, textStatus, errorThrown) {
+                    alert('Ajax request failed due to :' + errorThrown);
+                }
+            });
+        });
     });
     
     /**
