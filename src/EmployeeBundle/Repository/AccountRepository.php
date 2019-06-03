@@ -37,5 +37,19 @@ class AccountRepository extends \Doctrine\ORM\EntityRepository {
         $query->execute();
     }
     
-
+    /**
+     * Find the records matching the search input value.
+     * @param string $inputValue
+     * @return array
+     */
+    public function searchAccount($inputValue) {
+        $inputValue .= "%";
+        $query = $this->createQueryBuilder('a')
+        ->select('a')
+        ->where('a.accountNumber LIKE ?1')
+        ->setParameter(1, $inputValue)
+        ->getQuery()
+        ->getResult();
+        return $query;
+    }
 }

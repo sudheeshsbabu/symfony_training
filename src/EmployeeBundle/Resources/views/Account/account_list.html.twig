@@ -3,7 +3,13 @@
 {% block accountList %}
 <div class="accounts-wrap">
     <h1>{{ 'List of Companies' }}</h1>
-    
+    <div class="search-account-wrap">
+         <form id="accounts-search-form" action="{{ path('accounts_search') }}">
+            <input type="text" class="form-control" placeholder="Search" name ="find" required>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
+    </div>
+    <p>&nbsp;</p>
     <div class="add-account-wrap">
         <a href="{{ path('account_add') }}"><button id="add-account">Add Department</button></a>
     </div>

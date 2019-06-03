@@ -89,3 +89,7 @@ accounts_list:
 account_delete:
     path: /admin/account/delete/{id}
     defaults: {_controller: EmployeeBundle:Account:deleteAccount }
+    
+accounts_search:
+    path: /admin/account/search
+    defaults: { _controller: EmployeeBundle:Account:searchAccount }

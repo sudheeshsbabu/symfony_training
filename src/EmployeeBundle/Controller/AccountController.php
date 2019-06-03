@@ -209,4 +209,18 @@ class AccountController extends Controller {
         
         return $this->redirectToRoute('accounts_list');
     }
+    
+    /**
+     * Implements search.
+     * @param Request $request
+     * @return type Response
+     */
+    public function searchAccountAction(Request $request) {
+        $inputValue =  $request->get("find");
+        $entityManager = $this->getDoctrine()->getManager();
+        $accounts = $entityManager->getRepository('EmployeeBundle:Account')->searchAccount($inputValue);
+        return $this->render('EmployeeBundle:Account:account_search_result.html.twig', array(
+               'accounts' => $accounts
+           ));
+    }
 }
