@@ -22,14 +22,15 @@ class DefaultController extends Controller
 //
 //        return new Response('Created product id '.$product->getId());
             $id = '5cf8bc2daa485b43d3703671';
-            $product = $this->get('doctrine_mongodb')
-                ->getRepository('ProductBundle:Product')
-                ->find($id);
+            $price = 19.99;
+            $repository = $this->get('doctrine_mongodb')
+                ->getRepository('ProductBundle:Product');
+            $product = $repository->findOneByPrice($price);
 
             if (!$product) {
                 throw $this->createNotFoundException('No product found for id '.$id);
             }
-            return new Response('Created product id '.$product->getId());
+            return new Response('Created product id '.$product->getPrice());
         
     }
 }
