@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new EmployeeBundle\EmployeeBundle(),
             new TestBundle\TestBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new ProductBundle\ProductBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
