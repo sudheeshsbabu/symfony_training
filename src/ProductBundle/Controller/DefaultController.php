@@ -12,6 +12,10 @@ use ProductBundle\Form\Model\Registration;
 
 class DefaultController extends Controller
 {
+    /**
+     * Sample function to perform mongodb curd operations.
+     * @return Response
+     */
     public function indexAction()
     {
 //        return $this->render('ProductBundle:Default:index.html.twig');
@@ -37,6 +41,10 @@ class DefaultController extends Controller
         
     }
     
+    /**
+     * User Registration form.
+     * @return type
+     */
     public function registerAction()
     {
         $form = $this->createForm(RegistrationType::class, new Registration());
@@ -45,6 +53,11 @@ class DefaultController extends Controller
         ]);
     }
     
+    /**
+     * User Registration form action part.
+     * @param Request $request
+     * @return type
+     */
     public function registerSaveAction(Request $request)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
