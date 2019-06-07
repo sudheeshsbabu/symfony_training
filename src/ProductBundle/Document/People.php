@@ -11,6 +11,7 @@ namespace ProductBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
+use ProductBundle\Document\States;
 
 /**
  * @MongoDB\Document(collection="people")
@@ -34,6 +35,11 @@ class People {
      * @Assert\NotBlank()
      */
     protected $country;
+    
+    /**
+     * @Assert\Type(type="ProductBundle\Document\States")
+     */
+    protected $states;
 
     /**
      * Get id
@@ -87,5 +93,16 @@ class People {
     public function getCountry()
     {
         return $this->country;
+    }
+        
+    public function setStates(States $states)
+    {
+        $this->states = $states;
+    }
+
+    public function getStates()
+    {
+        //dump($this->states);die;
+        return $this->states;
     }
 }

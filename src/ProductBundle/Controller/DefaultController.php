@@ -124,7 +124,7 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em->persist($account);
+            $em->persist($people);
             $em->flush();
             $status = 'success';
             $people = new People();
