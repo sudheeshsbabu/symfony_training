@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use ProductBundle\Form\Type\RegistrationType;
 use ProductBundle\Form\Model\Registration;
+use ProductBundle\Document\People;
+use ProductBundle\Form\Type\PeopleType;
+use ProductBundle\Document\States;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class DefaultController extends Controller
 {
@@ -77,5 +81,59 @@ class DefaultController extends Controller
         return $this->render('ProductBundle:Account:register.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+    
+    /**
+     * Add people form.
+     * @return type
+     */
+    public function addPeopleAction() {
+        $people = new People();
+        $form = $this->createAddPeopleForm($people);
+        return $this->render('ProductBundle:Account:people_form.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+    
+    /**
+     * Add people form creator.
+     * @param type $people
+     * @return type
+     */
+    private function createAddPeopleForm($people) {
+        $form = $this->createForm(PeopleType::class, $people, array(
+            'action' => $this->generateUrl('product_people_save'),
+        ));
+        $form->add('save', SubmitType::class, array(
+            'label' => 'Save',
+            'attr' => array('class' => 'btn btn-sm btn-success'),
+        ));
+        return $form;
+    }
+    
+    /**
+     * Action for add people form.
+     * @param Request $request
+     * @return \ProductBundle\Controller\JsonResponse
+     */
+    public function savePeopleFormAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $status = 'error';
+        $people = new People();
+        $form = $this->createAddPeopleForm($people);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em->persist($account);
+            $em->flush();
+            $status = 'success';
+            $people = new People();
+            $form = $this->createAddPeopleForm($people);
+        }
+        $formView = $this->renderView('ProductBundle:Account:people_form.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
+        return new JsonResponse(['status' => $status, 'formView' => $formView]);
     }
 }

@@ -9,3 +9,11 @@ user_registration:
 user_registration_action:
     path: /UserRegistration/save
     defaults: { _controller: ProductBundle:Default:registerSave }
+
+product_add_people:
+    path: /product/people/add
+    defaults: { _controller: ProductBundle:Default:addPeople }
+    
+product_people_save:
+    path: /product/people/save
+    defaults: { _controller: ProductBundle:Default:savePeopleForm }

@@ -11,12 +11,15 @@ namespace ProductBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @MongoDB\Document(collection="users")
- * @MongoDBUnique(fields="email")
+ * @MongoDB\Document(collection="states")
+ * @MongoDBUnique(fields="country")
  */
-class User {
+class States {
     
     /**
      * @MongoDB\Id
@@ -25,16 +28,15 @@ class User {
     
     /**
      * @MongoDB\Field(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\NotBlank())
      */
-    protected $email;
+    protected $country;
     
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\Field(type="collection")
      * @Assert\NotBlank()
      */
-    protected $password;
+    protected $states;
 
     /**
      * Get id
@@ -47,46 +49,46 @@ class User {
     }
 
     /**
-     * Set email
+     * Set country
      *
-     * @param string $email
+     * @param string $country
      * @return $this
      */
-    public function setEmail($email)
+    public function setCountry($country)
     {
-        $this->email = $email;
+        $this->country = $country;
         return $this;
     }
 
     /**
-     * Get email
+     * Get country
      *
-     * @return string $email
+     * @return string $country
      */
-    public function getEmail()
+    public function getCountry()
     {
-        return $this->email;
+        return $this->country;
     }
 
     /**
-     * Set password
+     * Set states
      *
-     * @param string $password
+     * @param collection $states
      * @return $this
      */
-    public function setPassword($password)
+    public function setStates($states)
     {
-        $this->password = $password;
+        $this->states = $states;
         return $this;
     }
 
     /**
-     * Get password
+     * Get states
      *
-     * @return string $password
+     * @return collection $states
      */
-    public function getPassword()
+    public function getStates()
     {
-        return $this->password;
+        return $this->states;
     }
 }

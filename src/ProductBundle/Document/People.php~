@@ -13,10 +13,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 
 /**
- * @MongoDB\Document(collection="users")
- * @MongoDBUnique(fields="email")
+ * @MongoDB\Document(collection="people")
+ * @MongoDBUnique(fields="name")
  */
-class User {
+class People {
     
     /**
      * @MongoDB\Id
@@ -25,16 +25,15 @@ class User {
     
     /**
      * @MongoDB\Field(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\NotBlank())
      */
-    protected $email;
+    protected $name;
     
     /**
      * @MongoDB\Field(type="string")
      * @Assert\NotBlank()
      */
-    protected $password;
+    protected $country;
 
     /**
      * Get id
@@ -47,46 +46,46 @@ class User {
     }
 
     /**
-     * Set email
+     * Set name
      *
-     * @param string $email
+     * @param string $name
      * @return $this
      */
-    public function setEmail($email)
+    public function setName($name)
     {
-        $this->email = $email;
+        $this->name = $name;
         return $this;
     }
 
     /**
-     * Get email
+     * Get name
      *
-     * @return string $email
+     * @return string $name
      */
-    public function getEmail()
+    public function getName()
     {
-        return $this->email;
+        return $this->name;
     }
 
     /**
-     * Set password
+     * Set country
      *
-     * @param string $password
+     * @param string $country
      * @return $this
      */
-    public function setPassword($password)
+    public function setCountry($country)
     {
-        $this->password = $password;
+        $this->country = $country;
         return $this;
     }
 
     /**
-     * Get password
+     * Get country
      *
-     * @return string $password
+     * @return string $country
      */
-    public function getPassword()
+    public function getCountry()
     {
-        return $this->password;
+        return $this->country;
     }
 }
