@@ -1,3 +1,11 @@
 product_homepage:
     path:     /ProductHomePage
     defaults: { _controller: ProductBundle:Default:index }
+    
+user_registration:
+    path: /UserRegistration
+    defaults: { _controller: ProductBundle:Default:register }
+    
+user_registration_action:
+    path: /UserRegistration/save
+    defaults: { _controller: ProductBundle:Default:registerSave }

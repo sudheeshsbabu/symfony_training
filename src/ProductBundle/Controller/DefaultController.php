@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ProductBundle\Document\Product;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use ProductBundle\Form\Type\RegistrationType;
+use ProductBundle\Form\Model\Registration;
 
 class DefaultController extends Controller
 {
@@ -32,5 +35,34 @@ class DefaultController extends Controller
             }
             return new Response('Created product id '.$product->getPrice());
         
+    }
+    
+    public function registerAction()
+    {
+        $form = $this->createForm(RegistrationType::class, new Registration());
+        return $this->render('ProductBundle:Account:register.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+    
+    public function registerSaveAction(Request $request)
+    {
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $form = $this->createForm(RegistrationType::class, new Registration());
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $registration = $form->getData();
+
+            $dm->persist($registration->getUser());
+            $dm->flush();
+
+            return $this->redirectToRoute('user_registration');
+        }
+
+        return $this->render('ProductBundle:Account:register.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

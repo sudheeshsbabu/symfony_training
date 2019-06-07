@@ -1,0 +1,38 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+namespace ProductBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
+
+/**
+ * @MongoDB\Document(collection="users")
+ * @MongoDBUnique(fields="email")
+ */
+class User {
+    
+    /**
+     * @MongoDB\Id
+     */
+    protected $id;
+    
+    /**
+     * @MongoDB\Field(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     */
+    protected $email;
+    
+    /**
+     * @MongoDB\Field(type="string")
+     * @Assert\NotBlank()
+     */
+    protected $password;
+}
