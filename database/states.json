@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5cfa2114c3d16bbc468667e8"},"country":"IN","states":[{"state":"KL"},{"state":"KA"},{"state":"KB"}]}
+{"_id":{"$oid":"5cfa2114c3d16bbc468667e9"},"country":"ABC","states":[{"state":"AA"},{"state":"AB"},{"state":"AC"}]}
+{"_id":{"$oid":"5cfa2114c3d16bbc468667ea"},"country":"DEF","states":[{"state":"DD"},{"state":"DE"},{"state":"DF"}]}
