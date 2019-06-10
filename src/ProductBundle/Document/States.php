@@ -9,15 +9,13 @@
 namespace ProductBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Form\FormTypeInterface;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use ProductBundle\Document\Country;
 
 /**
  * @MongoDB\Document(collection="states")
- * @MongoDBUnique(fields="country")
+ * @MongoDBUnique(fields="id")
  */
 class States {
     
@@ -27,16 +25,16 @@ class States {
     protected $id;
     
     /**
-     * @MongoDB\Field(type="string")
-     * @Assert\NotBlank())
+     * @MongoDB\ReferenceOne(targetDocument="Country")
      */
     protected $country;
     
     /**
-     * @MongoDB\Field(type="collection")
+     * @MongoDB\Field(type="string"))
      * @Assert\NotBlank()
      */
-    protected $states;
+    protected $state;
+
 
     /**
      * Get id
@@ -51,10 +49,10 @@ class States {
     /**
      * Set country
      *
-     * @param string $country
+     * @param ProductBundle\Document\Country $country
      * @return $this
      */
-    public function setCountry($country)
+    public function setCountry(\ProductBundle\Document\Country $country)
     {
         $this->country = $country;
         return $this;
@@ -63,7 +61,7 @@ class States {
     /**
      * Get country
      *
-     * @return string $country
+     * @return ProductBundle\Document\Country $country
      */
     public function getCountry()
     {
@@ -71,24 +69,24 @@ class States {
     }
 
     /**
-     * Set states
+     * Set state
      *
-     * @param collection $states
+     * @param string $state
      * @return $this
      */
-    public function setStates($states)
+    public function setState($state)
     {
-        $this->states = $states;
+        $this->state = $state;
         return $this;
     }
 
     /**
-     * Get states
+     * Get state
      *
-     * @return collection $states
+     * @return string $state
      */
-    public function getStates()
+    public function getState()
     {
-        return $this->states;
+        return $this->state;
     }
 }

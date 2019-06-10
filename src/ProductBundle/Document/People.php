@@ -12,10 +12,11 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 use ProductBundle\Document\States;
+use ProductBundle\Document\Country;
 
 /**
  * @MongoDB\Document(collection="people")
- * @MongoDBUnique(fields="name")
+ * @MongoDBUnique(fields="id")
  */
 class People {
     
@@ -31,15 +32,15 @@ class People {
     protected $name;
     
     /**
-     * @MongoDB\Field(type="string")
-     * @Assert\NotBlank()
+     * @MongoDB\ReferenceOne(targetDocument="Country")
      */
     protected $country;
     
     /**
-     * @Assert\Type(type="ProductBundle\Document\States")
+     * @MongoDB\ReferenceOne(targetDocument="States")
      */
-    protected $states;
+    protected $state;
+
 
     /**
      * Get id
@@ -76,10 +77,10 @@ class People {
     /**
      * Set country
      *
-     * @param string $country
+     * @param ProductBundle\Document\Country $country
      * @return $this
      */
-    public function setCountry($country)
+    public function setCountry(\ProductBundle\Document\Country $country)
     {
         $this->country = $country;
         return $this;
@@ -88,21 +89,32 @@ class People {
     /**
      * Get country
      *
-     * @return string $country
+     * @return ProductBundle\Document\Country $country
      */
     public function getCountry()
     {
         return $this->country;
     }
-        
-    public function setStates(States $states)
+
+    /**
+     * Set state
+     *
+     * @param ProductBundle\Document\States $state
+     * @return $this
+     */
+    public function setState(\ProductBundle\Document\States $state)
     {
-        $this->states = $states;
+        $this->state = $state;
+        return $this;
     }
 
-    public function getStates()
+    /**
+     * Get state
+     *
+     * @return ProductBundle\Document\States $state
+     */
+    public function getState()
     {
-        //dump($this->states);die;
-        return $this->states;
+        return $this->state;
     }
 }

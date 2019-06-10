@@ -17,3 +17,7 @@ product_add_people:
 product_people_save:
     path: /product/people/save
     defaults: { _controller: ProductBundle:Default:savePeopleForm }
+    
+insert_states:
+    path: /state/add
+    defaults: { _controller: ProductBundle:Default:insertStates }

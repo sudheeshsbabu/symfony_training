@@ -1,3 +1,6 @@
-{"_id":{"$oid":"5cfa2114c3d16bbc468667e8"},"country":"IN","states":[{"state":"KL"},{"state":"KA"},{"state":"KB"}]}
-{"_id":{"$oid":"5cfa2114c3d16bbc468667e9"},"country":"ABC","states":[{"state":"AA"},{"state":"AB"},{"state":"AC"}]}
-{"_id":{"$oid":"5cfa2114c3d16bbc468667ea"},"country":"DEF","states":[{"state":"DD"},{"state":"DE"},{"state":"DF"}]}
+{"_id":{"$oid":"5cfe52c8aa485b0d5b5a845f"},"country":{"$ref":"country","$id":{"$oid":"5cfe5295e8ff3e22f48923bc"},"$db":"test"},"state":"Manchester"}
+{"_id":{"$oid":"5cfe52ecaa485b058b6cee42"},"country":{"$ref":"country","$id":{"$oid":"5cfe5295e8ff3e22f48923bc"},"$db":"test"},"state":"Chelsea"}
+{"_id":{"$oid":"5cfe5331aa485b058a508367"},"country":{"$ref":"country","$id":{"$oid":"5cfe5290e8ff3e22f48923bb"},"$db":"test"},"state":"Chicago"}
+{"_id":{"$oid":"5cfe5341aa485b0589689ad1"},"country":{"$ref":"country","$id":{"$oid":"5cfe5290e8ff3e22f48923bb"},"$db":"test"},"state":"California"}
+{"_id":{"$oid":"5cfe5351aa485b058715606f"},"country":{"$ref":"country","$id":{"$oid":"5cfe5289e8ff3e22f48923ba"},"$db":"test"},"state":"Kerala"}
+{"_id":{"$oid":"5cfe535eaa485b05886c72f6"},"country":{"$ref":"country","$id":{"$oid":"5cfe5289e8ff3e22f48923ba"},"$db":"test"},"state":"Karnataka"}

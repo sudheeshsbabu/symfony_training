@@ -11,14 +11,13 @@ namespace ProductBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
-use ProductBundle\Document\States;
-use ProductBundle\Document\Country;
+
 
 /**
- * @MongoDB\Document(collection="people")
+ * @MongoDB\Document(collection="country")
  * @MongoDBUnique(fields="id")
  */
-class People {
+class Country {
     
     /**
      * @MongoDB\Id
@@ -30,15 +29,36 @@ class People {
      * @Assert\NotBlank())
      */
     protected $name;
-    
-    /**
-     * @MongoDB\ReferenceOne(targetDocument="Country")
-     */
-    protected $country;
-    
-    /**
-     * @MongoDB\ReferenceOne(targetDocument="States")
-     */
-    protected $state;
 
+    /**
+     * Get id
+     *
+     * @return id $id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string $name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 }

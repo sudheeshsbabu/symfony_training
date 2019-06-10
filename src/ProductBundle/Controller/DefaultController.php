@@ -13,6 +13,8 @@ use ProductBundle\Document\People;
 use ProductBundle\Form\Type\PeopleType;
 use ProductBundle\Document\States;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 
 class DefaultController extends Controller
 {
@@ -88,6 +90,7 @@ class DefaultController extends Controller
      * @return type
      */
     public function addPeopleAction() {
+
         $people = new People();
         $form = $this->createAddPeopleForm($people);
         return $this->render('ProductBundle:Account:people_form.html.twig', array(
@@ -124,8 +127,8 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em->persist($people);
-            $em->flush();
+//            $em->persist($people);
+//            $em->flush();
             $status = 'success';
             $people = new People();
             $form = $this->createAddPeopleForm($people);
@@ -134,6 +137,30 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
 
-        return new JsonResponse(['status' => $status, 'formView' => $formView]);
+        //return new JsonResponse(['status' => $status, 'formView' => $formView]);
+        return $this->redirectToRoute('product_add_people');
+    }
+    
+    /**
+     * Dummy function to insert data to states collection
+     * @return Response
+     */
+    public function insertStatesAction() {
+        $repository = $this->get('doctrine_mongodb')->getRepository('ProductBundle:Country');
+        $name = 'INDIA';
+        $india = $repository->findOneByName($name);
+        $name = 'USA';
+        $usa = $repository->findOneByName($name);
+        $name = 'UK';
+        $uk = $repository->findOneByName($name);
+        
+        $cal = new States();
+        $cal->setState('Karnataka');
+        $cal->setCountry($india);
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $dm->persist($cal);
+        $dm->flush();
+        
+        return new Response('Created state with id: '. $cal->getId());
     }
 }

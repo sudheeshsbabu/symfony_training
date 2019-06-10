@@ -9,13 +9,13 @@
 namespace ProductBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
-use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use ProductBundle\Document\Country;
 
 /**
  * @MongoDB\Document(collection="states")
- * @MongoDBUnique(fields="country")
+ * @MongoDBUnique(fields="id")
  */
 class States {
     
@@ -25,14 +25,14 @@ class States {
     protected $id;
     
     /**
-     * @MongoDB\Field(type="string")
-     * @Assert\NotBlank())
+     * @MongoDB\ReferenceOne(targetDocument="Country")
      */
     protected $country;
     
     /**
-     * @MongoDB\Field(type="collection")
+     * @MongoDB\Field(type="string"))
      * @Assert\NotBlank()
      */
-    protected $states;
+    protected $name;
+
 }

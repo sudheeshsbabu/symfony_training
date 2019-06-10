@@ -21,59 +21,58 @@ use Symfony\Component\Form\Form;
  *
  * @author reizend333
  */
-class PeopleType extends AbstractType 
-{
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+class PeopleType extends AbstractType {
+
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('name')
                 ->add('country', DocumentType::class, [
-                    'class' => 'ProductBundle:States',
-                    'choice_label'=>'country',
-                    // Not required here
-//                    'query_builder' => function(DocumentRepository $er) {
-//                        return $er->createQueryBuilder('d');
-//                        ;
-//                    },
-                    'placeholder' => '-- Select --',
-                    ])
-                ->add('states')
+                    'class' => 'ProductBundle:Country',
+                    'choice_label' => 'name',
+                    'query_builder' => function(DocumentRepository $er) {
+                        return $er->createQueryBuilder('c');
+                    },
+                    'placeholder' => '-- Country --',
+                ])
+                ->add('state')
                 ->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'))
                 ->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
     }
-    
-    private function onPreSubmit(FormEvent $event) 
-    {
-        $form = $event->getForm();
-        $data = $event->getData();
-        $country = array_key_exists('country', $data) ? $data['country'] : '';
-        $this->addState($form, $country);
-    }
-    
-    public function configureOptions(OptionsResolver $resolver)
-    {
+
+    public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
             'data_class' => People::class,
         ));
     }
-    
+
     protected function addState(Form $form, $country) {
-        $form->remove('states');
-        $form->add('states', DocumentType::class, array(
-                'class' => 'ProductBundle:States',
-                'choice_label' => 'states',
-                'placeholder' => '- State -',
-                'query_builder' => function(DocumentRepository $er) use ($country) {
-                    return $er->createQueryBuilder('s')
-                    ->field('country')->equals($country);
-                }
+
+        $form->remove('state');
+        $form->add('state', DocumentType::class, array(
+            'class' => 'ProductBundle:States',
+            'choice_label' => 'state',
+            'placeholder' => '-- State --',
+            'required' => false,
+            'query_builder' => function(DocumentRepository $er) use ($country) {
+                return $er->createQueryBuilder('s');//->field('country')->equals($country);
+            }
         ));
-        
     }
-    
+
     function onPreSetData(FormEvent $event) {
         $data = $event->getData();
         $form = $event->getForm();
+        $country = array_key_exists('country', $data) ? $data['country'] : '';
         $country = $data->getCountry() != NULL ? $data->getCountry() : '';
+
         $this->addState($form, $country);
     }
+
+    function onPreSubmit(FormEvent $event) {
+        $form = $event->getForm();
+        $data = $event->getData();
+        $country = array_key_exists('country', $data) ? $data['country'] : '';
+
+        $this->addState($form, $country);
+    }
+
 }
